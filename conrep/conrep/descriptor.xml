@@ -1,0 +1,43 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-conrep</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 conrep</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T14:02:01</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>opt/tools/conrep</file>
+    <file>opt/tools/conrep.xml</file>
+    <file>opt/tools/conrep_gen10.xml</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="conrep" type="tgz" size="596583">
+        <checksum checksum-type="sha-256">7e4eb9a876a2a0c4009706a327fe41691d7c76a6f6c5d71d487f25665c3846a8</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">286e0976104b3f66714d1cd55408aaf3b12f3a1596aa8d2c985240b71d9f68cb</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">8a994bb176795d2c86c14be94509e68145fc232c</checksum>
+    </payload>
+  </payloads>
+</vib>

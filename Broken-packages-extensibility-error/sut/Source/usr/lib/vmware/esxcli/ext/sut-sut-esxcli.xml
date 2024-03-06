@@ -1,0 +1,205 @@
+<plugin xmlns="http://www.vmware.com/Products/ESX/5.0/esxcli/">
+  <version>1.0.0</version> 
+
+   <namespaces>
+      <namespace path="sut">
+         <description>sut plugin.</description>
+      </namespace>
+	  <namespace path="sut.pollingintervalinminutes">
+         <description> Specifies time interval between iSUT polling operations for information from SUM, HPE OneView or iLO Amplifier Pack.</description>
+      </namespace>
+	  <namespace path="sut.stagingdirectory">
+         <description>Configure the staging directory path.</description> 
+      </namespace>
+	  <namespace path="sut.iloqueuedupdates">
+         <description>Command to enable/disable iLO queue mode of operation.</description>
+      </namespace>
+	  <namespace path="sut.mode">
+         <description>Set iSUT mode of operation.</description> 
+      </namespace>
+	  <namespace path="sut.ilocreds">
+         <description>Perform authentication for sut service to operate in high security modes. </description>
+      </namespace>
+   </namespaces>
+
+   <commands>
+		
+      <command path="sut.start">
+         <description>If iSUT is in Auto mode, starts the iSUT service.</description> 
+         <input-spec>
+         </input-spec>
+         <output-spec>
+			<list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -s</execute>
+      </command>
+		
+	  <command path="sut.stop">
+         <description>Stops the iSUT service.</description> 
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -o</execute>
+      </command>
+		
+	  <command path="sut.mode.set">
+         <description>Set iSUT mode of operation.</description> 
+         <input-spec>
+            <parameter name="mode" required="true" shortname="m" type="string">
+               <description>Valid values are autostage, autodeploy, autodeployreboot, ondemand.</description> 
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -m '$val{mode}' </execute>
+      </command>
+	  
+	  <command path="sut.ilocreds.set">
+         <description>iLO credentials to enable iSUT perform updates, when iLO 5 is in one of the High Security modes.</description> 
+         <input-spec>
+            <parameter name="ilousername" required="true" shortname="u" type="string">
+               <description>Specifies iLO user name.</description>
+            </parameter>
+			<parameter name="ilopassword" required="true" shortname="p" type="string">
+               <description>Specifies iLO password.</description>
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -u '$val{ilousername}' '$val{ilopassword}'</execute>
+      </command>
+	  
+	  <command path="sut.iloqueuedupdates.set">
+         <description>If enabled, iSUT polls the iLO for any updates in the iLO Installation Queue. Default value is true. Valid for iLO 5 nodes only.</description> 
+         <input-spec>
+            <parameter name="enabled" required="true" shortname="e" type="string">
+               <description>Valid values are true, false.</description>
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -e '$val{enabled}'</execute>
+      </command>
+	  
+	  <command path="sut.import">
+         <description>Uses the configuration file parameters and applies the settings.</description> 
+         <input-spec>
+            <parameter name="import" required="true" shortname="i" type="string">
+               <description>Specifies the path of configuration file.</description> 
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -i '$val{import}'</execute>
+      </command>
+	  
+	  <command path="sut.export">
+         <description>Uses the configuration file name as a parameter and writes all iSUT setting values to the file.</description> 
+         <input-spec>
+            <parameter name="export" required="true" shortname="x" type="string">
+               <description>Specifies the path of configuration file.</description> 
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -x '$val{export}' </execute>
+      </command>
+	  
+	  <command path="sut.deregister">
+         <description>Resets database to default values and stops the iSUT service.</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -r</execute>
+      </command>
+	  
+	  <command path="sut.clearilocreds">
+         <description>Clears the stored iLO credentials from the iSUT database.</description> 
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -c</execute>
+      </command>
+	  
+	  <command path="sut.pollingintervalinminutes.set">
+         <description>Specifies how frequently iSUT requests information from SUM, HPE OneView or iLO Amplifier Pack.</description> 
+         <input-spec>
+            <parameter name="pollingintervalinminutes" required="true" shortname="t" type="string">
+               <description>Specifies polling interval in minutes (2-1440).</description> 
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -t '$val{pollingintervalinminutes}'</execute>
+      </command>
+	  
+	  <command path="sut.stagingdirectory.set">
+         <description>Specifies the directory path where iSUT stages components.</description> 
+         <input-spec>
+            <parameter name="stagingdirectory" required="true" shortname="d" type="string">
+               <description>Specifies staging directory path.</description> 
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type="string">
+            </list>
+         </output-spec>
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh /opt/sut/bin/sutesxcli.sh -d '$val{stagingdirectory}'</execute>
+      </command>
+   </commands>
+</plugin>

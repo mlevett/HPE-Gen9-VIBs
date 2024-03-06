@@ -1,0 +1,141 @@
+{
+  "Description": "Integrated Smart Update Tools",
+  "ID": "HPSUT-PROVIDER",
+  "KeepAlive": 100,
+  "KeepAliveDelete": 100,
+  "KeepAliveUnits": "OptOut",
+  "Name": "HPSUT",
+  "Version": 1,
+  "Resources": [
+    {
+      "Children": [
+        {
+          "ContentType": "application/json",
+          "Directory": true,
+          "Name": "Settings",
+          "Privileges": {
+            "GET": [
+              "Login"
+            ],
+            "PATCH": [
+              "ConfigureServer"
+            ],
+            "PUT": [
+              "ConfigureServer"
+            ]
+          },
+          "Type": "SUT.2.9.1"
+        },
+        {
+          "ContentType": "application/json",
+          "Directory": true,
+          "Name": "SystemInventory",
+          "Privileges": {
+            "GET": [
+              "Login"
+            ]
+          },
+          "Type": "SUTSystemInventory.2.9.1"
+        },
+        {
+          "ContentType": "application/json",
+          "Directory": true,
+          "Name": "TaskSettings",
+          "Privileges": {
+            "GET": [
+              "Login"
+            ],
+            "PATCH": [
+              "ConfigureServer"
+            ],
+            "PUT": [
+              "ConfigureServer"
+            ]
+          },
+          "Type": "SUTTaskSettings.2.9.1"
+        }
+      ],
+      "ContentType": "application/json",
+      "Directory": true,
+      "Name": "HPSUT",
+      "Parent": "Systems",
+      "Privileges": {
+        "GET": [
+          "Login"
+        ],
+        "PATCH": [
+          "ConfigureServer"
+        ],
+        "PUT": [
+          "ConfigureServer"
+        ]
+      },
+      "ReferenceFrom": "Oem.Hp.links.SUT",
+      "Type": "SUT.2.9.1"
+    }
+  ],
+  "Schemas": [
+    {
+      "ContentEncoding": "gzip",
+      "Type": "SUT.2.9.1",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ]
+    },
+	{
+      "ContentEncoding": "gzip",
+      "Type": "SUTSettings.2.9.1",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ]
+    },
+    {
+      "ContentEncoding": "gzip",
+      "Type": "SUTSystemInventory.2.9.1",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ]
+    },
+		{
+      "ContentEncoding": "gzip",
+      "Type": "SUTTaskSettings.2.9.1",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ]
+    }
+  ],
+  "Registries": [
+    {
+      "ContentEncoding": "gzip",
+      "Type": "SUTReg.2.9.1",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-amshelpr</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 amshelpr</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T16:04:34</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+    <tag>PCIID 103c3307103c3381</tag>
+    <tag>PCIID 103c3307159000e4</tag>
+    <tag>PCIID 103c33071590027f</tag>
+    <tag>module</tag>
+    <tag>driver</tag>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>etc/init.d/amshelpr</file>
+    <file>etc/shutdown.d/amshelpr</file>
+    <file>etc/vmware/daemon/config/amshelpr.json</file>
+    <file>opt/amshelpr/bin/ahslogger</file>
+    <file>opt/amshelpr/bin/amshelpr</file>
+    <file>opt/amshelpr/bin/amshelpresxcli</file>
+    <file>opt/amshelpr/data/esxtoprc</file>
+    <file>opt/amshelpr/data/intf-mgmt.py</file>
+    <file>opt/amshelpr/data/pci.ids</file>
+    <file>usr/lib/vmware/daemonMgmt/esxcliPlugins/amshelpr/amshelpr.xml.sh</file>
+    <file>usr/lib/vmware/esxcli/ext/amshelpr-amshelpr.xml</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="amshelpr" type="tgz" size="591128">
+        <checksum checksum-type="sha-256">646e666f51a0078aec6eee96c4f2f3922d862a9c4291471f9d8e9ffb92b73df5</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">8fd322b08f755eaafb6f882a56ebb4adbb5357d3aa3092c8915b8342c1a77d4a</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">a7ab69abb9f2843f234e53b5d8a6339eb7a62c1f</checksum>
+    </payload>
+  </payloads>
+</vib>

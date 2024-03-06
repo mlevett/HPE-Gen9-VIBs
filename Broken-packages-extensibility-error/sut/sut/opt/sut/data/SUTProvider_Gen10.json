@@ -1,0 +1,141 @@
+{
+  "Description": "Integrated Smart Update Tools",
+  "ID": "SUT-PROVIDER",
+  "KeepAlive": 100,
+  "KeepAliveDelete": 100,
+  "KeepAliveUnits": "OptOut",
+  "Name": "HPSUT",
+  "Registries": [
+    {
+      "ContentEncoding": "gzip",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ],
+	  "Type": "#SUTReg.v2_9_1.SUTReg"
+    }
+  ],
+   "Resources": [
+    {
+      "Children": [
+        {
+          "ContentType": "application/json",
+          "Directory": true,
+          "Name": "Settings",
+          "Privileges": {
+            "GET": [
+              "Login"
+            ],
+            "PATCH": [
+			 "ConfigureBios"
+            ],
+            "PUT": [
+			 "ConfigureBios"
+            ]
+          },
+          "Type": "#SUT.v2_9_1.SUT"
+        },
+        {
+          "ContentType": "application/json",
+          "Directory": true,
+          "Name": "SystemInventory",
+          "Privileges": {
+            "GET": [
+              "Login"
+            ]
+          },
+          "Type": "#SUTSystemInventory.v2_9_1.SUTSystemInventory"
+        },
+        {
+          "ContentType": "application/json",
+          "Directory": true,
+          "Name": "TaskSettings",
+          "Privileges": {
+            "GET": [
+              "Login"
+            ],
+            "PATCH": [
+			 "ConfigureBios"
+            ],
+            "PUT": [
+			 "ConfigureBios"
+            ]
+          },
+          "Type": "#SUTTaskSettings.v2_9_1.SUTTaskSettings"
+        }
+      ],
+      "ContentType": "application/json",
+      "Directory": true,
+      "Name": "HPSUT",
+      "Parent": "Systems",
+      "Privileges": {
+        "GET": [
+          "Login"
+        ],
+        "PATCH": [
+          "ConfigureBios"
+        ],
+        "PUT": [
+          "ConfigureBios"
+        ]
+      },
+      "ReferenceFrom": "Oem.Hpe.links.SUT",
+      "Type": "#SUT.v2_9_1.SUT"
+    }
+  ],
+  "Schemas": [
+    {
+      "ContentEncoding": "gzip",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ],
+	  "Type": "#SUT.v2_9_1.SUT"
+    },
+	{
+      "ContentEncoding": "gzip",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ],
+	  "Type": "#SUTSettings.v2_9_1.SUTSettings"
+    },
+    {
+      "ContentEncoding": "gzip",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ],
+	  "Type": "#SUTSystemInventory.v2_9_1.SUTSystemInventory"
+    },
+	{
+      "ContentEncoding": "gzip",
+      "Info": [
+        {
+          "Language": "en"
+        },
+        {
+          "Language": "jp"
+        }
+      ],
+	  "Type": "#SUTTaskSettings.v2_9_1.SUTTaskSettings"
+    }
+  ],
+   "Version": 1
+}

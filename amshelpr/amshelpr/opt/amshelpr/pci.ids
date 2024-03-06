@@ -1,0 +1,27 @@
+# HP iLO PCI IDs File
+#
+# Vendors, devices and subsystems.
+
+102b  Matrox Graphics, Inc.
+        0533  MGA G200EH
+                103c 3381  iLO4
+103c  Hewlett-Packard Company
+        3300  Integrated Lights-Out Virtual USB controller
+        3301  Integrated Lights-Out Serial Port
+        3302  Integrated Lights-Out Standard KCS Interface
+                103c 3304  iLO2
+                103c 3305  iLO2
+                103c 330e  iLO3
+                103c 3381  iLO4
+        3305  Integrated Lights-Out (iLO2) Controller
+        3306  HP Integrated Lights-Out Standard Slave Instrumentation & System Support
+                103c 330e  iLO3
+                103c 3381  iLO4
+        3307  HP Integrated Lights-Out Standard Management Processor Support and Messaging
+                103c 330e  iLO3
+                103c 3381  iLO4
+        3308  HP Integrated Lights-Out Standard MS Watchdog Timer
+                103c 330e  iLO3
+                103c 3381  iLO4
+
+

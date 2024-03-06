@@ -1,0 +1,49 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-fc-enablment</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 fc-enablment</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T14:02:29</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>etc/init.d/fchbaen.sh</file>
+    <file>opt/fcen64/libbrcmdfc.so</file>
+    <file>opt/fcen64/libbrcmemsdm.so</file>
+    <file>opt/fcen64/libdfc.so</file>
+    <file>opt/fcen64/libemsdm.so</file>
+    <file>opt/fcen64/libqlsdm-x86_64.so</file>
+    <file>opt/fcen64/libqrlapi.so</file>
+    <file>opt/fcen64/libstorelib.so.07.1401.0100.0000</file>
+    <file>opt/fcen64/storlib.conf</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="fc-enablement" type="tgz" size="6733598">
+        <checksum checksum-type="sha-256">c3dfbda9caf24fb02c079dd708d661573d3e19bcd5101d6b1003d6f9f93db0c7</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">1758fca45db92e418a3621fb9c4f1d2e5298a47e474ba74c3d007d85a2f2947e</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">765e635880852505b90e08c26ac09b21c90dd70b</checksum>
+    </payload>
+  </payloads>
+</vib>

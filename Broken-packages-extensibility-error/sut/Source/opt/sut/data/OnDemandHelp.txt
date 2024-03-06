@@ -1,0 +1,504 @@
+               Integrated Smart Update Tools OnDemand Help 2.9.1
+
+   Abstract
+   Part Number:
+   Published: 2019- November
+   Edition:
+   © Copyright 2015 - 2019 Hewlett Packard Enterprise Development LP
+
+                            iSUT command-line basics
+
+   The following example is the basic iSUT syntax:
+
+   sut /[command] (Windows)
+
+   sut -[command] (Linux/VMware ESXi)
+
+   NOTE:
+     * Running iSUT on a server with iLO configured in High Security mode
+       needs iLO Administrator credentials. Use the sut -set command to store
+       iLO credentials in the host so that iSUT can use the iLO credentials
+       for iLO communication. If you do not want iSUT to store the iLO
+       credentials, provide the credentials with each iSUT command. Providing
+       credentials with each command will not work with sut -deploy or sut
+       -deployreboot commands if the baseline also contains the iSUT
+       component. When using Auto mode, always use the sut -set command so
+       that iSUT performs the deploy operation in Auto mode when iLO is
+       configured in High Security mode.
+
+     * Running iSUT on a server with iLO configured in CAC mode requires iLO
+       certificate. Use the sut -addcertificate command to store the provided
+       iLO certificate and private key path details and private key password
+       in the host so that iSUT can use the iLO certificate for iLO
+       communication. If you do not want iSUT to store the iLO certificate,
+       provide the certificate with each iSUT command. Providing certificate
+       with each command will not work with sut -deploy or sut -deployreboot
+       commands if the baseline also contains the iSUT component. When using
+       Auto mode, always use the sut -addcertificate command so that iSUT
+       performs the deploy operation in Auto mode when iLO is configured in
+       CAC mode.
+
+                                    activate
+
+Syntax
+
+   /activate (Windows)
+
+   -activate (Linux/VMware)
+
+Description
+
+   Reboots the server if a reboot is required to activate the
+   firmware/software. The command asks for reboot confirmation.
+
+Options
+
+   Provide this option to avoid the reboot confirmation step.
+
+   sut /activate force
+
+Restrictions
+
+   Valid in the following state:
+
+     * InstalledPendingReboot
+
+Example input
+
+ sut /activate
+
+ sut -activate
+
+                                 addcertificate
+
+   Syntax
+
+     * /addcertificate (Windows)
+
+     * -addcertificate (Linux/VMware)
+
+   Description
+
+   Adds iLO certificate paths and private key password to iSUT database to
+   enable iSUT perform updates when iLO 5 is in CAC mode.
+
+   Options
+
+   sut /addcertificate <path to certificate file>
+
+   If iSUT finds the file and successfully adds it, iSUT queries the user for
+   a private key value -
+     * Enter the private key path:
+
+     * Does the private key have an associated password (yes/no):
+
+     * Enter the private key password:
+
+   Example input
+
+     * sut /addcertificate <path to certificate file>
+
+     * sut -addcertificate <path to certificate file>
+
+                                clearcertificate
+
+   Syntax
+     * /clearcertificate (Windows)
+
+     * -clearcertificate (Linux/VMware)
+
+   Description
+
+   Clears the stored iLO certificate from the iSUT database.
+
+   Example input
+
+     * sut /clearcertificate
+
+     * sut -clearcertificate
+
+                                 clearilocreds
+
+Syntax
+
+   /clearilocreds (Windows)
+
+   -clearilocreds (Linux)
+
+Description
+
+   Clears the stored iLO credentials from the iSUT database.
+
+Example input
+
+ sut /clearilocreds
+
+ sut -clearilocreds
+
+                                  clearstaging
+
+Syntax
+
+   /clearstaging (Windows)
+
+   -clearstaging (Linux)
+
+Description
+
+   Clears everything in the current staging directory.
+
+Restrictions
+
+   Not valid in the following states:
+
+     * Staging
+
+     * Staged
+
+     * Installing
+
+     * Activating
+
+     * InstalledPendingReboot
+
+Example input
+
+ sut /clearstaging
+
+ sut -clearstaging
+
+                                     deploy
+
+Syntax
+
+   /deploy (Windows)
+
+   -deploy (Linux)
+
+Description
+
+   Deploys components, and then enables verification after reboot to check
+   whether components are deployed correctly.
+
+Options
+
+   noautoverify
+
+           Passing parameter prevents iSUT from verifying the component
+           installation automatically after deployment.
+
+Example input
+
+ sut /deploy
+
+ sut -deploy
+
+                                  deployreboot
+
+Syntax
+
+   /deployreboot (Windows)
+
+   -deployreboot (Linux)
+
+Description
+
+   Deploys components and then reboots the server if a reboot is required.
+   After reboot, verifies if the updates are deployed correctly.
+
+Options
+
+   noautoverify
+
+           Passing parameter prevents iSUT from verifying the component
+           installation automatically after deployment is completed and
+           re-booted.
+
+Example input
+
+ sut /deployreboot
+
+ sut -deployreboot
+
+                                  exportconfig
+
+Syntax
+
+   /exportconfig <filename> (Windows)
+
+   -exportconfig <filename> (Linux)
+
+Description
+
+   Uses the configuration file name as a parameter and writes all iSUT
+   setting values to the file.
+
+Restrictions
+
+     * Valid in all states.
+
+Example input
+
+ sut /exportconfig <filename>
+
+ sut -exportconfig <filename>
+
+                                      help
+
+Syntax
+
+   /help (Windows)
+
+   -help (Linux)
+
+Description
+
+   Displays command-line help information.
+
+Example input
+
+ sut /help
+
+ sut /?
+
+ sut -help
+
+ sut -?
+
+                                  importconfig
+
+Syntax
+
+   /importconfig <path_to_config_file> (Windows)
+
+   -importconfig <path_to_config_file> (Linux)
+
+Description
+
+   Uses the configuration file parameters and applies the settings.
+
+Restrictions
+
+   This command is allowed in the following states:
+
+     * StageFailed
+
+     * InstallFailed
+
+     * Activated
+
+     * ActivatedFailed
+
+     * InstalledPendingReboot
+
+Example input
+
+ sut /importconfig <path_to_config_file>
+
+ sut -importconfig <path_to_config_file>
+
+                                      set
+
+Syntax
+
+   /set (Windows)
+
+   -set (Linux)
+
+Description
+
+   Changes iSUT options.
+
+Options
+
+   sut -set mode=<OnDemand,AutoStage,AutoDeploy,AutoDeployReboot>
+           Selects the mode iSUT uses.
+              * AutoStage: Stages components to the server.
+
+              * AutoDeploy: Stages and deploys the components.
+
+              * AutoDeployReboot: Stages, deploys, and if necessary, reboots
+                the server.
+
+              * OnDemand: iSUT deploys updates when the admin issues
+                commands.
+
+   sut -set stagingdirectory=<directory_path>
+
+           Specifies the directory where iSUT stages components.
+
+   sut -set rebootmessage <message>
+
+           iSUT displays the reboot message.
+
+   sut -set rebootdelay <seconds>
+
+           The number of seconds before iSUT reboots the node.
+
+   sut -set pollingintervalinminutes=<time_minutes>
+
+           How frequently iSUT requests information from SUM, HPE OneView or
+           iLO Amplifier Pack.
+
+   sut -set savelogs=<true/false>
+
+           Sets whether iSUT saves the log files.
+
+   sut -set enableiloqueuedupdates=<true/false>
+
+           Default = true. Valid for iLO 5 nodes only. If true, iSUT polls
+           the iLO for any updates in the iLO Installation Queue.
+
+   sut -set ilousername=<username> ilopassword=<password>
+
+           Enter iLO credentials, to enable the iSUT perform updates, when
+           iLO 5 is in one of the High Security modes.
+
+              * To hide the password characters, provide iLO username and
+                press Enter, which prompts you enter the password as below:
+
+                sut -set ilousername=<username>
+
+                Please provide the iLO password: <******>
+
+           The iLO credentials are stored in the iSUT database, and will be
+           used to run any On Demand commands in High Security mode.
+
+   sut -set ignorewarnings=true
+
+           Ignores warnings iSUT encounters during deployment.
+
+   sut -set tpmbypassflag=true
+
+           Bypasses TPM warnings.
+
+Example input
+
+ sut /set mode=OnDemand
+
+ sut -set mode=AutoStage
+
+                                     stage
+
+Syntax
+
+   /stage (Windows)
+
+   -stage (Linux)
+
+Description
+
+   Determines which components must be applied on the node and copies the
+   components to the staging directory.
+
+Restrictions
+
+   iSUT requires permissions to write to the staging directory.
+
+Example input
+
+ sut /stage
+
+ sut -stage
+
+                                     start
+
+Syntax
+
+   /start (Windows)
+
+   -start (Linux)
+
+Description
+
+   If iSUT is in Auto mode, starts the iSUT service.
+
+Restrictions
+
+   iSUT mode must be in the following modes:
+
+     * AutoStage
+
+     * AutoDeploy
+
+     * AutoDeployReboot
+
+Example input
+
+ sut /start
+
+ sut -start
+
+                                     status
+
+Syntax
+
+   /status (Windows)
+
+   -status (Linux)
+
+Description
+
+   Displays the current state of the iSUT engine.
+
+Example input
+
+ sut /status
+
+ sut -status
+
+                                      stop
+
+Syntax
+
+   /stop (Windows)
+
+   -stop (Linux)
+
+Description
+
+   Stops the iSUT service.
+
+Example input
+
+ sut /stop
+
+ sut -stop
+
+                                     verify
+
+Syntax
+
+   /verify (Windows)
+
+   -verify (Linux)
+
+Description
+
+   Verifies that the update happened successfully. Changes state to Activated
+   if the update is successful. Only required if you passed the noautoverify
+   parameter with the deploy or deployreboot command.
+
+Example input
+
+ sut /verify
+
+ sut -verify
+
+                                    version
+
+Syntax
+
+   /version (Windows)
+
+   -version (Linux)
+
+Description
+
+   Displays the installed version of iSUT.
+
+Example input
+
+ sut /version
+
+ sut -version

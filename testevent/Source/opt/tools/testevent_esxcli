@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "<?xml version=\"1.0\" ?>"
+echo "<output xmlns=\"http://www.vmware.com/Products/ESX/5.0/esxcli/\">"
+echo "<list type = \"string\">"
+echo "<string><![CDATA["
+/opt/tools/testevent $1 $2
+echo "]]></string>"
+echo "</list>"
+echo "</output>"

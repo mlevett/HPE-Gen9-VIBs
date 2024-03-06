@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!-- IMPORTANT: The plugin xmlns field below should  -->
+<!-- remain as it appears so the VIB package can     -->
+<!-- pass validation during signing. DO NOT CHANGE!  -->
+<plugin xmlns="http://www.vmware.com/Products/ESX/5.0/esxcli/">
+
+  <version>1.0.0</version>
+
+  <!-- Define an esxcli ssa namespace -->
+  <namespaces>
+  <namespace path="ssacli">
+  <description>Smart Storage Administrator CLI</description>
+  </namespace>
+  </namespaces>
+
+  <!-- Define an esxcli ssa object -->
+  <!--object namespace="ssa" object="ssacli"> -->
+  <!--description>SSACLI Utility</description>  -->
+  <!--/object> -->
+
+
+  <!--
+        Define the esxcli ssacli with options parameter command
+        Note: Yes, this is where the magic happens!
+   -->
+
+  <commands>
+     <command path="ssacli.cmd">
+        <description>SSACLI commands to be executed</description>
+        <input-spec>
+           <parameter name="cmdopts" type="string" required="true" shortname="q">
+              <description>Command options to be executed</description>
+           </parameter>
+        </input-spec>
+        <output-spec>
+           <list type = "string">
+           </list>
+        </output-spec>
+        <has-updates value="false" />
+        <format-parameters>
+           <formatter>simple</formatter>
+        </format-parameters>
+
+        <!--
+              Take the command options and append it for execution. The
+              following calls the script file and ensures the output is
+              in an output format that's compatible with esxcli.
+
+              Example usage:
+
+              # esxcli ssacli cmd -q 'controller all show'
+        -->
+        <execute>/opt/smartstorageadmin/ssacli/bin/ssacli_esx "$val{cmdopts}"</execute>
+     </command>
+
+     <command path="ssacli.ret">
+        <description>Return the exit code of the previous execution</description>
+        <input-spec></input-spec>
+        <output-spec>
+           <list type = "string">
+           </list>
+        </output-spec>
+        <has-updates value="false" />
+        <format-parameters>
+           <formatter>simple</formatter>
+        </format-parameters>
+
+        <!--
+              The following simply reads the /tmp/SSACLI_RET file and returns the
+              value in a string. This file is created by a previous execution
+              of the SSACLI application. If no file exist, an error msg is returned.
+
+              Example usage:
+
+              # esxcli ssacli ret
+        -->
+        <execute>/opt/smartstorageadmin/ssacli/bin/ssacli_ret </execute>
+     </command>
+
+  </commands>
+
+</plugin>

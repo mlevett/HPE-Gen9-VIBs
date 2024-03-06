@@ -1,0 +1,35 @@
+{
+    "INFO": [
+        "  Copyright 2020 Hewlett Packard Enterprise    ", 
+        "  All rights reserved. -- HPE Confidential  "
+    ], 
+    "PATHS": {
+        "LIB DIR": "/opt/amshelpr/lib64", 
+        "SOCKET DIR": "/opt/amshelpr/sockets", 
+        "BIN DIR": "/opt/amshelpr/bin", 
+        "DATA DIR": "/opt/amshelpr/data", 
+        "CONFIG FILE": "/etc/vmware/daemon/config/amshelpr.json", 
+        "VITAL DIR": "/opt/amshelpr/vital", 
+        "INSTALL ROOT": "/opt/amshelpr/", 
+        "TMP DIR": "/opt/amshelpr/tmp"
+    }, 
+    "SOLUTION ID": "amshelpr", 
+    "DESCRIPTION": "Agentless Management Service for Gen9", 
+    "PRIVILEGES": {
+        "SOCKET": {
+            "INET": [
+                "stream", 
+                "datagram"
+            ]
+        }
+    }, 
+    "DSDK VERSION": 1.1, 
+    "RESOURCES": {
+        "CHKCONFIG": [
+            99, 
+            99
+        ], 
+        "MEMORY RESERVATION": 100, 
+        "TEMP FILE RESERVATION": 250
+    }
+}

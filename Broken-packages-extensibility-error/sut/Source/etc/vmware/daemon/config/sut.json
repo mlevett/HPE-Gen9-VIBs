@@ -1,0 +1,37 @@
+{
+    "INFO": [
+        "  Copyright 2019 VMware, Inc.                  ", 
+        "  All rights reserved. -- VMware Confidential  "
+    ], 
+    "PATHS": {
+        "LIB DIR": "/opt/sut/lib64", 
+        "SOCKET DIR": "/opt/sut/sockets", 
+        "BIN DIR": "/opt/sut/bin", 
+        "DATA DIR": "/opt/sut/data", 
+        "CONFIG FILE": "/etc/vmware/daemon/config/sut.json", 
+        "VITAL DIR": "/opt/sut/vital", 
+        "INSTALL ROOT": "/opt/sut/", 
+        "TMP DIR": "/opt/sut/tmp"
+    }, 
+    "SOLUTION ID": "sut", 
+    "DESCRIPTION": "Integrated Smart Update Tools for VMware ESX", 
+    "PRIVILEGES": {
+        "SOCKET": {
+            "INET": [
+                "stream", 
+                "datagram", 
+                "loopback"
+            ]
+        }
+    }, 
+    "DSDK VERSION": 1.1, 
+    "RESOURCES": {
+        "CHKCONFIG": [
+            99, 
+            99
+        ], 
+        "MEMORY RESERVATION": 100, 
+        "VITAL DATA SIZE": 5, 
+        "TEMP FILE RESERVATION": 250
+    }
+}

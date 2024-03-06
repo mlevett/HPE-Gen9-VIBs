@@ -1,0 +1,41 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-hponcfg</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 hponcfg</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T15:03:33</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>opt/tools/hponcfg</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="hponcfg" type="tgz" size="64285">
+        <checksum checksum-type="sha-256">6110702ec666ac87557af0ed4e7fe16f99537384cf9e681b68ba0ffd7cf7660a</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">630a801ed1818b03221bd792aafb8ccdc55f58bc439129122af7b0fb17fe7755</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">ff302873632c033995d62674eee8c4d611cd15ea</checksum>
+    </payload>
+  </payloads>
+</vib>

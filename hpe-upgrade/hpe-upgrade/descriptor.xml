@@ -1,0 +1,41 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-hpe-upgrade</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 hpe-upgrade</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T15:03:36</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>opt/hpe-upgrade/hpe-upgrade</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="hpe-upgrade" type="tgz" size="173">
+        <checksum checksum-type="sha-256">fb91004d20d332a6624879401d60388aea169cd524529f0014874cffc0a78f3c</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">9b75671be65e15d1b2a55557c681e2583b588c84df582b16b3a69b73563320ab</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">2d62af00f74ce52fbd8b76a3af0ae1298ef74910</checksum>
+    </payload>
+  </payloads>
+</vib>

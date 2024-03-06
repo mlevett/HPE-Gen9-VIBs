@@ -1,0 +1,43 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-testevent</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 testevent</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T15:03:39</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>opt/tools/testevent</file>
+    <file>opt/tools/testevent_esxcli</file>
+    <file>usr/lib/vmware/esxcli/ext/testevent.xml</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="testevent" type="tgz" size="12199">
+        <checksum checksum-type="sha-256">4ac02de066f5cc9bfdb7467946bf378cb334a807b81a7712fdc1aefa0b84f1a4</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">035f7a145aec8ec538163e44011b48b2c4b267aacbae0c1898402f27a9b442e4</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">937748a150db04c7ab89aa4423114dc1c9e89c0a</checksum>
+    </payload>
+  </payloads>
+</vib>

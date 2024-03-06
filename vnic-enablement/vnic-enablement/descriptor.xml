@@ -1,0 +1,41 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-vnic-enablement</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 vnic-enablement</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T15:03:37</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>etc/init.d/vnicen.sh</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="vnic-enablement" type="tgz" size="3753">
+        <checksum checksum-type="sha-256">5a1821ae5fdd6e93324fa2d55d66e953a6950f820962d1970ca36bdc86d66b6a</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">101abe88376a796287eabf66bd65a160c8a6c50b414d3aba874f6399818f5132</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">093a22d3d73224c76251e5b6e139d6a6a502d418</checksum>
+    </payload>
+  </payloads>
+</vib>

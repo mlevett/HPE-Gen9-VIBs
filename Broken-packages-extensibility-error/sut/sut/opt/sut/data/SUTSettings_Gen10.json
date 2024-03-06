@@ -1,0 +1,57 @@
+{
+   "AdditionalBaseline":"None",
+   "IgnoreWarnings":false,
+    "@odata.id": "/redfish/v1/Systems/1/hpsut/settings/",
+	"@odata.context": "/redfish/v1/$metadata#sut.sut/",
+   "InstallationOptions":{
+      "Downgrade":false,
+      "FirmwareOnly":false,
+      "Rewrite":false,
+      "SoftwareOnly":false
+   },
+   "MessageID":"none",
+   "AdditionalMessageIDs":[
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""}
+	],
+   "InstallOrStageOccurredViaMode":"none",
+   "OptionalComponents":{
+      "AMS":false,
+      "SNMP":false,
+      "WBEM":false
+   },
+   "RebootOptions":{
+	  "Action":"IfNeeded",
+      "DelaySeconds":60,
+      "RebootMessage":"Rebooting this server"	  	  
+   },
+   "RebootAllowed":false,
+   "RequestStatus":"Idle",
+   "SaveLogs":true,
+   "TpmByPassFlag":true,
+   "Schedule":{
+      "DateTime":"",
+      "Recurrence":0,
+      "ScheduleType":"",
+      "ScheduleOptions":"",
+      "ScheduleStatus":""
+   },
+   "OperationMode":"Online",
+   "UriBaseline":"None",
+   "StageRetryCount":2,
+   "StageRetryDelay":600,
+   "UriBaselineVersion":"",
+   "InstallSet":[],
+   "DirectDeploy":false,
+   "EnableiLOQueuedUpdates":true,
+   "WaitTimeInSeconds": 0,
+   "UpdateSubOperationAllowed": "Ignore"
+}

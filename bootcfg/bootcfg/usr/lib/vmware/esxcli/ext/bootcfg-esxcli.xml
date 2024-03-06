@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<plugin xmlns="http://www.vmware.com/Products/ESX/5.0/esxcli/">
+   <version>1.0.0</version>
+
+   <namespaces>
+      <namespace path="bootcfg">
+         <description>Boot Configuration Utility</description>
+      </namespace>
+   </namespaces>
+
+   <!-- Define an esxcli hpacu object -->
+   <!--object namespace="hpacu" object="bootcfg"> -->
+   <!--description>bootcfg Utility</description>  -->
+   <!--/object> -->
+   <!-- 
+      Define the esxcli bootcfg with options parameter command
+      Note: Yes, this is where the magic happens!
+   -->
+   <commands>
+      <command path="bootcfg.execute">
+         <description>execute bootcfg command with options parameter</description>
+         <input-spec>
+            <parameter name="defaults" type="flag" required="false" shortname="D">
+               <description>Set Defaults everywhere</description>
+            </parameter>
+            <parameter name="floppy" type="flag" required="false" shortname="F">
+               <description>Floppy first</description>
+            </parameter>
+            <parameter name="cdrom" type="flag" required="false" shortname="C">
+               <description>CD ROM first</description>
+            </parameter>
+            <parameter name="harddrive" type="flag" required="false" shortname="H">
+               <description>Harddrive first</description>
+            </parameter>
+            <parameter name="usb" type="flag" required="false" shortname="U">
+               <description>USB first</description>
+            </parameter>
+            <parameter name="scu" type="flag" required="false" shortname="S">
+               <description>one time boot to system configuration utility or intelligent provisioning</description>
+            </parameter>
+            <parameter name="qcu" type="flag" required="false" shortname="Q">
+               <description>one time boot to quick configuration utility</description>
+            </parameter>
+            <parameter name="rbsu" type="flag" required="false" shortname="R">
+               <description>one time boot to RBSU</description>
+            </parameter>
+            <parameter name="pxe" type="flag" required="false" shortname="P">
+               <description>one time boot to PXE</description>
+            </parameter>
+            <parameter name="legacy" type="flag" required="false" shortname="L">
+               <description>one time to legacy</description>
+            </parameter>
+            <parameter name="uefi" type="flag" required="false" shortname="E">
+               <description>one time to UEFI</description>
+            </parameter>
+            <!--<parameter name="ipv4" type="flag" required="false" shortname="4">
+               <description>pxe boot policy support for only IPV4</description>
+            </parameter>
+	     <parameter name="ipv6" type="flag" required="false" shortname="6">
+               <description>pxe boot policy support for only IPV6</description>
+            </parameter>
+	     <parameter name="ipv4ipv6" type="flag" required="false" shortname="I">
+               <description>default pxe boot policy support for both IPV4 IPV6</description>
+            </parameter><-->
+	     <parameter name="bypass" type="flag" required="false" shortname="b">
+               <description>bypass F1/F2</description>
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/bootcfg_esxcli $if{defaults,-D} $if{floppy,-F} $if{cdrom,-C} $if{harddrive,-H} $if{usb,-U} $if{scu,-S} $if{qcu,-Q} $if{rbsu,-R} $if{pxe,-P} $if{legacy,-L} $if{uefi,-E} $if{bypass,-b}</execute>
+      </command>
+      <command path="bootcfg.show">
+         <description>show current bootcfg settings</description>
+         <input-spec />
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/bootcfg_esxcli</execute>
+      </command>
+      <command path="bootcfg.help">
+         <description>show bootcfg help</description>
+         <input-spec />
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/bootcfg_esxcli --help</execute>
+      </command>
+   </commands>
+</plugin>

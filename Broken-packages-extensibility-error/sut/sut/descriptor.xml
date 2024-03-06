@@ -1,0 +1,72 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-sut</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 sut</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-06T12:12:09</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+    <tag>daemon</tag>
+    <tag>ConfigSchema:sut-701.2.9.1.16-1OEM.701.0.0.16850804:sut:usr/lib/vmware/configmanager/schemas/sut-701.2.9.1.16-1OEM.701.0.0.16850804-schema.json:sha-256:56b7aad2372263d7aae5fe7206c4d7d2945dc031739e8de09eac5da6353ef285</tag>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>etc/init.d/sut</file>
+    <file>etc/shutdown.d/sut</file>
+    <file>etc/vmware/daemon/config/sut.json</file>
+    <file>opt/sut/bin/gatherlogs.sh</file>
+    <file>opt/sut/bin/sut</file>
+    <file>opt/sut/bin/sutd.sh</file>
+    <file>opt/sut/bin/sutesxcli.sh</file>
+    <file>opt/sut/data/OnDemandHelp.txt</file>
+    <file>opt/sut/data/SUTProvider.json</file>
+    <file>opt/sut/data/SUTProvider_Gen10.json</file>
+    <file>opt/sut/data/SUTRegistryEN_Legacy_zipped.json.gz</file>
+    <file>opt/sut/data/SUTRegistryEN_Redfish.json</file>
+    <file>opt/sut/data/SUTRegistryEN_Redfish_zipped.json.gz</file>
+    <file>opt/sut/data/SUTRegistryJP_Legacy_zipped.json.gz</file>
+    <file>opt/sut/data/SUTRegistryJP_Redfish_zipped.json.gz</file>
+    <file>opt/sut/data/SUTSchema_Legacy_zipped.json.gz</file>
+    <file>opt/sut/data/SUTSchema_Redfish_zipped.json.gz</file>
+    <file>opt/sut/data/SUTSettings.json</file>
+    <file>opt/sut/data/SUTSettingsSchema_Legacy_zipped.json.gz</file>
+    <file>opt/sut/data/SUTSettingsSchema_Redfish_zipped.json.gz</file>
+    <file>opt/sut/data/SUTSettings_Gen10.json</file>
+    <file>opt/sut/data/SUTSystemInventorySchema_Legacy_zipped.json.gz</file>
+    <file>opt/sut/data/SUTSystemInventorySchema_Redfish_zipped.json.gz</file>
+    <file>opt/sut/data/SUTTasksettings.json</file>
+    <file>opt/sut/data/SUTTasksettings_Legacy_zipped.json.gz</file>
+    <file>opt/sut/data/SUTTasksettings_Redfish_zipped.json.gz</file>
+    <file>opt/sut/data/SUT_Gen10.json</file>
+    <file>usr/lib/vmware/configmanager/schemas/sut-701.2.9.1.16-1OEM.701.0.0.16850804-schema.json</file>
+    <file>usr/lib/vmware/daemonMgmt/esxcliPlugins/sut/sut-esxcli.xml.sh</file>
+    <file>usr/lib/vmware/esxcli/ext/sut-sut-esxcli.xml</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="sut" type="tgz" size="3435672">
+        <checksum checksum-type="sha-256">e52404c28a0149343a35af69b492308f82fc5ecbbd630249497361b2bdbb4d5b</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">a9d6e2c49ba02e9d8ad108c9826359219a52ea77b9d645a81809058b72fbd905</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">c8e7c07061974ab13612ee4999a6623a088685d9</checksum>
+    </payload>
+  </payloads>
+</vib>

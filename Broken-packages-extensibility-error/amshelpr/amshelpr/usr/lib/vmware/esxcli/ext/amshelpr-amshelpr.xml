@@ -1,0 +1,57 @@
+<plugin xmlns="http://www.vmware.com/Products/ESX/5.0/esxcli/">
+   <version>1.0.0</version>
+
+   <namespaces>
+      <namespace path="amshelper">
+         <description>Agentless Management Service (AMS) for Gen9 commands</description>
+      </namespace>
+      <namespace path="amshelper.ahslog">
+         <description>AMS Active Health System (AHS) Logging commands for Gen9</description>
+      </namespace>
+   </namespaces>
+
+   <commands>
+      <command path="amshelper.ahslog.enable">
+         <description>The time interval parameter indicates how often CPU and Memory Usage will be logged to AHS.</description>
+         <input-spec>
+            <parameter name="timeinterval" required="true" shortname="t" type="int">
+               <description>Valid values are 1 ( 1 minute ), 2 ( 10 minutes ) and 3 ( 1 hour ).</description>
+            </parameter>
+           </input-spec>
+         <output-spec>
+            <list type="string" />
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/amshelpr/amshelpr.xml.sh /opt/amshelpr/bin/amshelpresxcli -n $val{timeinterval}</execute>
+      </command>
+     <command path="amshelper.ahslog.disable">
+         <description>Disable CPU and Memory Usage periodic logging to AHS.</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type="string" />
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/amshelpr/amshelpr.xml.sh /opt/amshelpr/bin/amshelpresxcli -x</execute>
+      </command>
+      <command path="amshelper.ahslog.show">
+         <description>Show the current CPU and Memory Usage periodic logging interval value in minutes. A value of 0 indicates that CPU and Memory Usage periodic logging is disabled.</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type="string" />
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/usr/lib/vmware/daemonMgmt/esxcliPlugins/amshelpr/amshelpr.xml.sh /opt/amshelpr/bin/amshelpresxcli -z</execute>
+      </command>
+    </commands>
+</plugin>

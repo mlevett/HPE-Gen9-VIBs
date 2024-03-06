@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<plugin xmlns="http://www.vmware.com/Products/ESX/5.0/esxcli/">
+   <version>1.0.0</version>
+
+   <namespaces>
+      <namespace path="testevent">
+         <description>Test Event Utility</description>
+      </namespace>
+      <namespace path="testevent.periodicevent">
+         <description>Manage the periodic event configuration</description>
+      </namespace>
+   </namespaces>
+
+   <!-- Define an esxcli testevent object -->
+   <!--object namespace="testevent" object="testevent"> -->
+   <!--description>Test Event Utility</description>  -->
+   <!--/object> -->
+   <!-- 
+      Define the esxcli testevent with options parameter command
+      Note: Yes, this is where the magic happens!
+   -->
+   <commands>
+      <command path="testevent.execute">
+         <description>execute testevent command</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/testevent_esxcli -x</execute>
+      </command>
+      <command path="testevent.help">
+         <description>show testevent help</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/testevent_esxcli -h</execute>
+      </command>
+      <command path="testevent.periodicevent.enable">
+         <description>enable the periodic event with timeinterval command option</description>
+         <input-spec>
+            <parameter name="timeinterval" type="int" required="true" shortname="t">
+               <description>the timeinterval value range in days {1 to 255}</description>
+               <constraint type="range">
+                  <range min="1" max="255"/>
+               </constraint>
+            </parameter>
+         </input-spec>
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/testevent_esxcli -e $val{timeinterval}</execute>
+      </command>
+      <command path="testevent.periodicevent.disable">
+         <description>disable the periodic event</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/testevent_esxcli -d</execute>
+      </command>
+      <command path="testevent.periodicevent.show">
+         <description>show the current periodic event settings</description>
+         <input-spec>
+         </input-spec>
+         <output-spec>
+            <list type = "string"></list>
+         </output-spec>
+         <has-updates value="false" />
+         <format-parameters>
+            <formatter>simple</formatter>
+         </format-parameters>
+         <execute>/opt/tools/testevent_esxcli -s</execute>
+      </command>
+   </commands>
+</plugin>

@@ -1,0 +1,18 @@
+{
+	"ServiceState": "Disabled",
+	"ServiceVersion": "2.9.1",
+	"Mode": "AutoStage",	
+	"PollingIntervalInMinutes" : 5,
+	"OperationRequestor": "OS Administrator",
+	"StagingDirectory": "",
+	"IsSelfUpdate": false,
+	"@odata.id": "/redfish/v1/Systems/1/hpsut/",
+	"@odata.context": "/redfish/v1/$metadata#sut.sut/",
+	"HPSUMPID": 0,
+	"LastBootUptime": "none",
+	"LastOperationTime": "none",
+	"Verify": "autoVerify",
+	"SelfUpdateStatus":"none",
+	"SUTCompName":"",
+	"ID": "HPSUT"
+}

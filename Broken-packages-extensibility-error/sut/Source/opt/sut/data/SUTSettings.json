@@ -1,0 +1,55 @@
+{
+   "AdditionalBaseline":"None",
+   "IgnoreWarnings":false,
+   "InstallationOptions":{
+      "Downgrade":false,
+      "FirmwareOnly":false,
+      "Rewrite":false,
+      "SoftwareOnly":false
+   },
+   "MessageID":"none",
+   "AdditionalMessageIDs":[
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""},
+		{"MessageID": ""}
+	],
+   "InstallOrStageOccurredViaMode":"none",
+   "OptionalComponents":{
+      "AMS":false,
+      "SNMP":false,
+      "WBEM":false
+   },
+   "RebootOptions":{
+	  "Action":"IfNeeded",
+      "DelaySeconds":60,
+      "RebootMessage":"Rebooting this server"	  	  
+   },
+   "RebootAllowed":false,
+   "RequestStatus":"Idle",
+   "SaveLogs":true,
+   "TpmByPassFlag":true,
+   "Schedule":{
+      "DateTime":"",
+      "Recurrence":0,
+      "ScheduleType":"",
+      "ScheduleOptions":"",
+      "ScheduleStatus":""
+   },
+   "OperationMode":"Online",
+   "UriBaseline":"None",
+   "StageRetryCount":2,
+   "StageRetryDelay":600,
+   "UriBaselineVersion":"",
+   "InstallSet":[],
+   "DirectDeploy":false,
+   "EnableiLOQueuedUpdates":false,
+   "WaitTimeInSeconds": 0,
+   "UpdateSubOperationAllowed": "Ignore"
+}

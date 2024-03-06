@@ -1,0 +1,2788 @@
+ <Conrep>
+	<global>
+		<helptext><![CDATA[
+		This is the input file for CONREP describing the 
+		configurable settings for the iLO5/Gen10 ProLiant servers.
+		]]></helptext>
+	<fileversion>1.27</fileversion>
+	<minimumconrepversion>5.00</minimumconrepversion>
+	<platforms>
+		<platform>Gen10</platform>
+		<platform>Gen10 Plus</platform>
+	</platforms>
+	<onmismatch>exception</onmismatch>
+	</global>
+<!-- Language -->
+	<Section name="Language">
+		<helptext><![CDATA[Select this option to change the language.]]></helptext>			
+		<ev>CQHRBL</ev>
+		<length>1</length>
+		<value id="0x01">English</value>
+		<value id="0x06">Japanese</value>
+		<value id="0x07">Simplified_Chinese</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Setup_Browser_Selection">
+		<helptext><![CDATA[Select which setup browser to use: GUI or Text. Auto mode uses text when the user enters RBSU via serial console, and uses GUI via IRC or physical terminal.]]></helptext>			
+		<ev>CQHGUI</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">GUI</value>
+		<value id="0x02">Text</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Workload Profile -->
+	<Section name="Workload_Profile">
+		<helptext><![CDATA[Select this option to choose a workload profile for power and performance.]]></helptext>			
+		<ev>CQHPROF</ev>
+		<length>1</length>
+		<value id="0x00">General_Power_Efficient_Compute</value>
+		<value id="0x01">General_Peak_Frequency_Compute</value>
+		<value id="0x02">General_Throughput_Compute</value>
+		<value id="0x03">Virtualization_Power_Efficient</value>
+		<value id="0x10">Virtualization_Max_Performance</value>
+		<value id="0x04">Low_Latency</value>
+		<value id="0x05">Mission_Critical</value>
+		<value id="0x06">Transactional_Application_Processing</value>
+		<value id="0x07">High_Performance_Compute</value>
+		<value id="0x08">Decision_Support</value>
+		<value id="0x09">Graphic_Processing</value>
+		<value id="0x0A">I/O_Throughput</value>
+		<value id="0x0F">Custom</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Options / Boot Time Optimizations Options -->
+	<Section name="Dynamic_Power_Capping_Functionality">
+		<helptext><![CDATA[Use this option to configure when the System ROM executes power calibration during the boot process.]]></helptext>			
+		<ev>CQHPER</ev>
+		<length>4</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x04">Disabled</value>
+		<value id="0x08">Auto</value>
+		<mask>0x0C</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Extended_Memory_Test">
+		<helptext><![CDATA[When enabled, the system validates memory during the memory initialization process.]]></helptext>			
+		<ev>CQHMEM</ev>
+		<length>4</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="Memory_Fast_Training">
+		<helptext><![CDATA[This option allows for a boot time reduction by controlling when the BIOS bypasses a full memory training.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMEM</ev>
+		<length>4</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x10">Enabled</value>
+		<mask>0x30</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="UEFI_POST_Discovery_Mode">
+		<helptext><![CDATA[Use this option to configure the UEFI POST Discovery Mode.]]></helptext>			
+		<ev>CQHPDM</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">Force_Full_Discovery</value>
+		<value id="0x02">Force_Fast_Discovery</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Clear_on_Warm_Reset">
+		<helptext><![CDATA[Use this option to configure when memory is cleared on warm resets.]]></helptext>			
+		<ev>CQHMEMCLEAR</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Options / Serial Port Options -->
+	<Section name="Embedded_Serial_Port">
+		<helptext><![CDATA[Select this option to assign the logical COM Port address and associated default resources to the selected physical serial port. The operating system can overwrite this setting.]]></helptext>			
+		<ev>CQHUART</ev>
+		<length>3</length>
+		<value id="0x41">COM1_IRQ4</value>
+		<value id="0x32">COM2_IRQ3</value>
+		<value id="0x53">COM3_IRQ5</value>
+		<value id="0x07">Disabled</value>
+		<mask>0xF7</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Virtual_Serial_Port">
+		<helptext><![CDATA[Use this option to assign the logical COM port address and associated default resources used by the Virtual Serial Port (VSP).]]></helptext>			
+		<ev>CQHUART</ev>
+		<length>3</length>
+		<value id="0x41">COM1_IRQ4</value>
+		<value id="0x32">COM2_IRQ3</value>
+		<value id="0x53">COM3_IRQ5</value>
+		<value id="0x07">Disabled</value>
+		<mask>0xF7</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="USB_Console_Redirection">
+		<helptext><![CDATA[Enable this option to allow the serial console to be mirrored to a USB port connected with the HP Console Cable Kit.]]></helptext>			
+		<ev>CQHUSBCON</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xF7</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Serial_Port_DTR_Support">
+		<helptext><![CDATA[Use this option to select the configuration of the Serial Port Data Terminal Ready (DTR) pin.]]></helptext>			
+		<ev>CQHDTR</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Options / Serial Port Options / BIOS Serial Console & EMS -->
+	<Section name="BIOS_Serial_Console_Port">
+		<helptext><![CDATA[Use this option to re-direct video and keystrokes through the serial port to OS boot.]]></helptext>			
+		<ev>CQHCON</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Physical_Serial_Port</value>
+		<value id="0x02">Virtual_Serial_Port</value>
+		<value id="0x03">Auto</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="BIOS_Serial_Console_Emulation_Mode">
+		<helptext><![CDATA[Use this option to select the emulation mode type.]]></helptext>			
+		<ev>CQHTTY</ev>
+		<length>1</length>
+		<value id="0x01">VT100</value>
+		<value id="0x02">ANSI</value>
+		<value id="0x03">VT100+</value>
+		<value id="0x04">VT-UTF8</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="BIOS_Serial_Console_Baud_Rate">
+		<helptext><![CDATA[This is the transfer rate at which data is transmitted through the serial port.]]></helptext>			
+		<ev>CQHBAUD</ev>
+		<length>1</length>
+		<value id="0x01">9600</value>
+		<value id="0x02">19200</value>
+		<value id="0x05">38400</value>
+		<value id="0x03">57600</value>
+		<value id="0x04">115200</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="EMS_Console">
+		<helptext><![CDATA[Use this option to configure the ACPI serial port settings, which include the ability to redirect the Windows Server Emergency Management console (EMS) through either the physical or virtual serial port.]]></helptext>			
+		<ev>CQHEMS</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Physical_Serial_Port</value>
+		<value id="0x02">Virtual_Serial_Port</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Options / USB Options -->
+	<Section name="USB_Control">
+		<helptext><![CDATA[Select which USB port are enabled.]]></helptext>			
+		<ev>CQSUSB</ev>
+		<length>1</length>
+		<value id="0x00">All_USB_Ports_Enabled</value>
+		<value id="0x01">All_USB_Ports_Disabled</value>
+		<value id="0x02">External_USB_Ports_Disabled</value>
+		<value id="0x03">Internal_USB_Ports_Disabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="USB_Boot_Support">
+		<helptext><![CDATA[Set this option to disabled to prevent the system from booting to any USB devices connected to the server.]]></helptext>			
+		<ev>CQHUSB</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x08">Disabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Removable_Flash_Media_Boot_Sequence">
+		<helptext><![CDATA[For Legacy Boot Mode Only. Use this option to select which USB or SD Card devices you want to search for first when enumerating boot devices.]]></helptext>			
+		<ev>CQHUSB</ev>
+		<length>1</length>
+		<value id="0x00">Internal_DriveKeys_First</value>
+		<value id="0x10">External_DriveKeys_First</value>
+		<value id="0x20">Internal_SD_Card_First</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Virtual_Install_Disk">
+		<helptext><![CDATA[Use this option to control the Virtual Install Disk. The Virtual Install Disk contains drivers specific to this server that an OS can use during installation.]]></helptext>			
+		<ev>CQHVID</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Internal_SD_Card_Slot">
+		<helptext><![CDATA[Use this option to enable or disable the Internal SD Card Slot. When set to disabled, the SD card slot is disabled, regardless of whether an SD Card is installed or not.]]></helptext>			
+		<ev>CQHSDC</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Options / Server Availbility -->
+	<Section name="ASR_Status">
+		<helptext><![CDATA[Use this option to configure the Automatic Server Recovery option, which enables the system to automatically reboot if the server locks up.]]></helptext>			
+		<ev>CQHSTS</ev>
+		<length>1</length>
+		<value id="0x30">Disabled</value>
+		<value id="0x31">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="ASR_Timeout">
+		<helptext><![CDATA[When Automatic Server Recovery is enabled, you can use this option to set the time to wait before rebooting the server in the event of an operating system crash or server lockup.]]></helptext>			
+		<ev>CQHCPR</ev>
+		<length>8</length>
+		<value id="0x0A">10_Minutes</value>
+		<value id="0x0F">15_Minutes</value>
+		<value id="0x14">20_Minutes</value>
+		<value id="0x1E">30_Minutes</value>
+		<value id="0x05">5_Minutes</value>
+		<mask>0xFF</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="Wake-On_LAN">
+		<helptext><![CDATA[You can configure the server to be powered on remotely when it receives a special packet.]]></helptext>			
+		<ev>CQHWOL</ev>
+		<length>1</length>
+		<value id="0x01">Enabled</value>
+		<value id="0x02">Disabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="POST_F1_Prompt">
+		<helptext><![CDATA[Use this option to configure the system to display the F1 key in the server POST screen.]]></helptext>			
+		<ev>CQHF1P</ev>
+		<length>1</length>
+		<value id="0x02">Disabled</value>
+		<value id="0x00">Delayed_2_seconds</value>
+		<value id="0x03">Delayed_20_seconds</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Power_Button_Mode">
+		<helptext><![CDATA[Disabling this option disables the momentary power button functionality.]]></helptext>			
+		<ev>CQHPRBT</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Automatic_Power-On">
+		<helptext><![CDATA[Use this option to configure the server to automatically power on when AC power is applied to the system.]]></helptext>			
+		<ev>CQHAPON</ev>
+		<length>1</length>
+		<value id="0x00">Always_Power_On</value>
+		<value id="0x01">Restore_Last_Power_State</value>
+		<value id="0x03">Always_Power_Off</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Power-On_Delay">
+		<helptext><![CDATA[Use this option to delay the server from turning on for a specified time.]]></helptext>			
+		<ev>CQHPWRDLY</ev>
+		<length>1</length>
+		<value id="0x00">No_Delay</value>
+		<value id="0x01">15_Second_Delay</value>
+		<value id="0x02">30_Second_Delay</value>
+		<value id="0x03">45_Second_Delay</value>
+		<value id="0x04">60_Second_Delay</value>
+		<value id="0x0F">Random_Delay</value>
+		<mask>0x0F</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="POST_ASR">
+		<helptext><![CDATA[Use this option to set the wait timer before rebooting the server in the event of a server lockup.]]></helptext>			
+		<ev>CQHASR</ev>
+		<length>2</length>
+		<value id="0x00">POST_ASR_Off</value>
+		<value id="0x01">POST_AST_On</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="POST_AST_Timer">
+		<helptext><![CDATA[When Automatic Server Recovery is enabled, you can use this option to set the time to wait before rebooting the server in the event of an operating system crash or server lockup.]]></helptext>			
+		<ev>CQHASR</ev>
+		<length>2</length>
+		<value id="0x00">10_Minute_Timer</value>
+		<value id="0x01">15_Minute_Timer</value>
+		<value id="0x02">20_Minute_Timer</value>
+		<value id="0x03">30_Minute_Timer</value>
+		<mask>0x03</mask>
+		<byte>1</byte>
+	</Section>
+<!-- System Options / Server Asset Information / Server Information -->
+	<Section name="Server_Name">
+		<helptext><![CDATA[Select this option to modify the server name text line.]]></helptext>		
+		<ev>CQHLS1</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Server_Primary_OS">
+		<helptext><![CDATA[Use this option to modify the Server Primary OS text line.]]></helptext>		
+		<ev>CQHLS3</ev>
+		<length>43</length>
+		<format>text</format>
+	</Section>
+	<Section name="Server_Other_Information">
+		<helptext><![CDATA[Use this option to modify the Other Server text line.]]></helptext>		
+		<ev>CQHLS4</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Power-On_Logo">
+		<helptext><![CDATA[No longer used. Use this option to disable the display of the logo during system boot.]]></helptext>			
+		<ev>CQHPUS</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Options / Server Asset Information / Administrator Information -->
+	<Section name="Administrator_Name">
+		<helptext><![CDATA[Enter the server administrator's name text.]]></helptext>		
+		<ev>CQHLA1</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Administrator_Phone_Number">
+		<helptext><![CDATA[Enter the server administrator's phone number text.]]></helptext>		
+		<ev>CQHLA2</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Administrator_E-mail_Address">
+		<helptext><![CDATA[Enter the server administrator's e-mail address.]]></helptext>		
+		<ev>CQHLA5</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Administrator_Other_Information">
+		<helptext><![CDATA[Enter the server administrator's information text.]]></helptext>		
+		<ev>CQHLA4</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+<!-- System Options / Server Asset Information / Service Contract Information -->
+	<Section name="Service_Contact_Name">
+		<helptext><![CDATA[Enter the server service contact name text.]]></helptext>		
+		<ev>CQHLC1</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Service_Contact_Phone_Number">
+		<helptext><![CDATA[Enter the server service contact phone number text.]]></helptext>		
+		<ev>CQHLC2</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Service_Contact_E-mail_Address">
+		<helptext><![CDATA[Enter the server service contact e-mail address.]]></helptext>		
+		<ev>CQHLC5</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+	<Section name="Service_Contact_Other_Information">
+		<helptext><![CDATA[Enter the other server service contact information text.]]></helptext>		
+		<ev>CQHLC4</ev>
+		<length>29</length>
+		<format>text</format>
+	</Section>
+<!-- System Options / Server Asset Information -->
+	<Section name="Custom_POST_Message">
+		<helptext><![CDATA[Enter a message to be displayed during system startup.]]></helptext>		
+		<ev>CQHPMSG</ev>
+		<length>63</length>
+		<format>text</format>
+	</Section>
+<!-- System Options / Diagnostics Options -->
+	<Section name="Embedded_Diagnostics">
+		<helptext><![CDATA[Use this option to enable or disable Embedded Diagnostics functionality.]]></helptext>			
+		<ev>CQHDIAGS</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Embedded_Diagnostics_Mode">
+		<helptext><![CDATA[No longer used. Use this option to configure Embedded Diagnostics in Auto or Text Console mode.]]></helptext>			
+		<ev>CQHDIAGS</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x02">Text_Console</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Processor Options -->
+	<Section name="Intel_Hyper-Threading">
+		<helptext><![CDATA[Use this option to enable or disable Intel Hyper-Threading. When enabled, each physical processor core operates as two logical processor cores.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="AMD_SMT_Option">
+		<helptext><![CDATA[Use this option to enable or disable AMD SMT. When enabled, each physical processor core operates as two logical processor cores.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="Enabled_Cores_per_Processor">
+		<helptext><![CDATA[This option allows limiting the number of enabled processor cores per physical processor. 00 = Enable All Cores.]]></helptext>
+		<ev>CQHPROCD</ev>
+		<length>1</length>
+	</Section>
+	<Section name="AMD_Performance_Determinism">
+		<helptext><![CDATA[Use this option to configure the AMD Processor for Performance or Power Determinism.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x01">Performance_Deterministic</value>
+		<value id="0x00">Power_Deterministic</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<!--Added Determinism_Control -->
+	<Section name="AMD_Determinism_Control">
+		<helptext><![CDATA[Use this option to configure AMD determinism control. Auto uses the processor fused values.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x00">Determinism_Auto</value>
+		<value id="0x80">Determinism_Manual</value>
+		<mask>0x80</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Page_Table_Entry_Speculative_Lock_Scheduling">
+		<helptext><![CDATA[Disabling this forces Page Table Entry locks to only be scheduled non-speculatively. Disabling this feature will impact performance.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x10">Disabled</value>
+		<value id="0x00">Enabled</value>
+		<mask>0x10</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_Speed_Select">
+		<helptext><![CDATA[Intel(R) Speed Select is available on only certain processor models.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHISS</ev>
+		<length>1</length>
+		<value id="0x00">Base</value>
+		<value id="0x01">Config_1</value>
+		<value id="0x02">Config_2</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Dynamic_Intel_Speed_Select_Mode">
+		<helptext><![CDATA[Dynamic Intel(R) Speed Select Mode is available on only certain processor models.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHISS</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Processor_x2APIC_Support">
+		<helptext><![CDATA[x2APIC support enables operating systems to run more efficiently on high core count configurations. It also optimized interrupt distribution in virtualized environments.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<value id="0x02">Force_Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Processor_Physical_Addressing">
+		<helptext><![CDATA[This option limits the processors physical addressing (PAE) to 46-bits.]]></helptext>			
+		<ev>CQHCPUPA</ev>
+		<length>1</length>
+		<value id="0x00">Default</value>
+		<value id="0x01">Limited</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Processor_RAPL_wattage_value">
+		<helptext><![CDATA[First 4 bytes/values is the wattage value. This is a per Processor RAPL value applicable for all populated processors in the system. Modify DRAM RAPL wattage value in milliwatts, as instructed by qualified personnel.]]></helptext>
+		<ev>CQHRAPLC</ev>
+		<length>36</length>
+	</Section>
+	<!--Added Performance  -->
+<!-- Debug Performance Options Control -->
+	<Section name="Infinity_Fabric_Performance_State">
+		<helptext><![CDATA[Configure the system to adjust the core frequency in small increments when changing CStates.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDDBGP</ev>
+		<length>9</length>
+		<value id="0x00">P0</value>
+		<value id="0x01">P1</value>
+		<value id="0x02">P2</value>
+		<value id="0x0F">DISABLED</value>
+		<mask>0x0F</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Infinity_Fabric_Power_Management">
+		<helptext><![CDATA[When this feature is enabled, the EPYC processor will dynamically vary the clock frequency of the Infinity Fabric based on activity level.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDDBGP</ev>
+		<length>9</length>
+		<value id="0x00">Disable</value>
+		<value id="0x10">Enable</value>
+		<mask>0x10</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Package_Power_Limit_Contro_Mode">
+		<helptext><![CDATA[This is a per processor Package Power Limit value applicable for all populated processors in the system.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDDBGP</ev>
+		<length>9</length>
+		<value id="0x00">Manual</value>
+		<value id="0x40">Automatic</value>
+		<mask>0x40</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="C-State_Efficiency_Mode">
+		<helptext><![CDATA[Configure the system to adjust the core frequency in small increments when changing CStates.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDDBGP</ev>
+		<length>9</length>
+		<value id="0x00">Disable</value>
+		<value id="0x80">Enable</value>
+		<mask>0x80</mask>
+		<byte>0</byte>
+	</Section>
+<!-- AMD SMU feature knobs added-->
+	<Section name="Data_Fabric_C-State_Enable">
+		<helptext><![CDATA[Use this option to enable or disable Data Fabric C-States.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDSMU</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">ForceEnable</value>
+		<value id="0x02">Disable</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Collaborative_Power_Control">
+		<helptext><![CDATA[For operating systems that support the Processor Clocking Control (PCC) Interface, enabling this option enables the Operating System to request processor frequency changes.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDSMU</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x04">Enable</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<!--Added XGMI -->
+<!-- XGMI Force and Max Link Width -->
+	<Section name="XGMI_Force_Link_Width">
+		<helptext><![CDATA[XGMI Force Link Width setting forces the XGMI link width to a value set by the user. Auto will use the system default setting.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDXGMI</ev>
+		<length>2</length>
+		<value id="0x00">x2</value>
+		<value id="0x01">x8</value>
+		<value id="0x02">x16</value>
+		<value id="0xFF">Auto</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="GMI_Max_Link_Width">
+		<helptext><![CDATA[XGMI Force Link Width setting forces the XGMI link width to a value set by the user. Auto will use the system default setting.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDXGMI</ev>
+		<length>2</length>
+		<value id="0x00">x2</value>
+		<value id="0x01">x8</value>
+		<value id="0x02">x16</value>
+		<value id="0xFF">Auto</value>
+		<mask>0xFF</mask>
+		<byte>1</byte>
+	</Section>
+<!--  Post Package Repair (PPR)  Added -->
+	<Section name="AMD_Post_Package_Repair">
+		<helptext><![CDATA[Use this option to enable/disable Post Package Repair (PPR) mode.]]></helptext>
+		<ev>CQHAMDMEMHEAL</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+
+<!-- Memory Options -->
+	<Section name="Advanced_Memory_Protection">
+		<helptext><![CDATA[Use this option to configure additional memory protection with ECC (Error Checking and Correcting). Options and support vary per system.]]></helptext>			
+		<ev>CQHAMPREQ</ev>
+		<length>1</length>
+		<value id="0x00">Advanced_ECC_Support</value>
+		<value id="0x01">Online_Spare_with_Advanced_ECC_Support</value>
+		<value id="0x02">Mirrored_Memory_with_Advanced_ECC_Support</value>
+		<value id="0x04">ADDDC_Support</value>
+		<value id="0x08">Auto</value>
+		<mask>0x0F</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Refresh_Rate">
+		<helptext><![CDATA[This option controls the refresh rate of the memory controller and might affect the performance and resiliency of the server memory.]]></helptext>			
+		<ev>CQHMEM</ev>
+		<length>4</length>
+		<value id="0x00">1x_Refresh</value>
+		<value id="0x10">2x_Refresh</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Channel_Interleaving">
+		<helptext><![CDATA[Now called Memory Interleaving. You can only configure this option if the Workload Profile is set to Custom. Use this option to modify the level of interleaving for which the memory system is configured.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMEM</ev>
+		<length>4</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Memory_Controller_Interleaving">
+		<helptext><![CDATA[Use this option to control the Memory Controller Interleaving option. When set to Auto, the system will automatically enable or disable memory controller interleaving based on the configuration of the system.]]></helptext>			
+		<ev>CQHMEM2</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x04">Disabled</value>
+		<mask>0x0C</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Memory_Interleaving_Mode">
+		<helptext><![CDATA[You can only configure this option if the Workload Profile is set to Custom.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDINTLV</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Channel_Interleaving</value>
+		<value id="0x02">Die_Interleaving</value>
+		<value id="0x03">Socket_Interleaving</value>
+		<value id="0x07">Auto</value>
+		<mask>0x07</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Memory_Interleaving_Mode_New">
+		<helptext><![CDATA[For newer AMD Processors. You can only configure this option if the Workload Profile is set to Custom.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDINTLV2</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x80">Enabled</value>
+		<mask>0x80</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Memory_Interleave_Size">
+		<helptext><![CDATA[This setting changes the size of the memory interleave.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDINTLV2</ev>
+		<length>1</length>
+		<value id="0x00">256_Bytes</value>
+		<value id="0x01">512_Bytes</value>
+		<value id="0x02">1024_Bytes</value>
+		<value id="0x03">2048_Bytes</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Memory_PStates">
+		<helptext><![CDATA[This setting enables memory pstates.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDMEMPSTATE</ev>
+		<length>1</length>
+		<value id="0xFF">Auto</value>
+		<value id="0x01">Disabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Periodic_Directory_Rinse">
+		<helptext><![CDATA[Enable Periodic Directory Rinse which may help manage directory capacity more efficiently.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDMEM</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x10">Disabled</value>
+		<mask>0x10</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Maximum_Memory_Bus_Frequency">
+		<helptext><![CDATA[Use this option to configure the memory system to run memory at a lower maximum speed than that supported by the installed processor and DIMM configuration.]]></helptext>			
+		<ev>CQHMEM</ev>
+		<length>4</length>
+		<value id="0x00">Auto</value>
+		<value id="0x02">1066_MHz</value>
+		<value id="0x03">1333_MHz</value>
+		<value id="0x04">1600_MHz</value>
+		<value id="0x05">1867_MHz</value>
+		<value id="0x06">2133_MHz</value>
+		<value id="0x07">2400_MHz</value>
+		<value id="0x08">2667_MHz</value>
+		<value id="0x09">2933_MHz</value>
+		<mask>0x0F</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Patrol_Scrubbing">
+		<helptext><![CDATA[This option corrects memory soft errors so that, over the length of the system runtime, the risk of producing multi-bit and uncorrectable errors is reduced.]]></helptext>			
+		<ev>CQHMEM</ev>
+		<length>4</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Patrol_Scrub_Duration">
+		<ev>CQHPTLSCRBDUR</ev>
+		<helptext><![CDATA[Select this option to configure the duration interval of when to run the patrol scrubber if patrol scrub is enabled.  Value is in hours(hexadecimal).]]></helptext>		
+		<length>1</length>
+	</Section>
+	<Section name="Node_Interleaving">
+		<helptext><![CDATA[NOTE: This setting is called NUMA on later/newer BIOS and Enabled/Disabled are reversed. Use this option to disable the NUMA architecture properties for the system.]]></helptext>			
+		<ev>CQHCOM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<!-- Virtual NUMA , Added  -->
+	<Section name="Virtual_NUMA">
+		<helptext><![CDATA[NOTE: Divide physical NUMA nodes into evenly sized virtual NUMA nodes in ACPI table. This may improve Windows performance on CPUs with more than 64 logical processors.]]></helptext>			
+		<ev>CQHCOM</ev>
+		<length>1</length> 
+		<value id="0x00">Disabled</value>
+		<value id="0x0C">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Mirroring_Mode">
+		<helptext><![CDATA[Use this option to configure various Memory Mirroring modes.]]></helptext>			
+		<ev>CQHMIRRORTYPE</ev>
+		<length>1</length>
+		<value id="0x01">Full_Mirroring</value>
+		<value id="0x02">Partial_Mirroring_OS_Configured</value>
+		<value id="0x04">Partial_Mirror_First_4GB_of_Memory</value>
+		<value id="0x08">Partial_Mirror_10%_of_Memory_Above_4GB</value>
+		<value id="0x10">Partial_Mirror_20%_of_Memory_Above_4GB</value>
+		<mask>0x1F</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Opportunistic_Self-Refresh">
+		<helptext><![CDATA[Enables or disables opportunistic self-refresh.]]></helptext>			
+		<ev>CQHMEM2</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Transparent_Secure_Memory_Encryption">
+		<helptext><![CDATA[Use this option to enable or disable TSME.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDMEM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Secure_Memory_Encryption">
+		<helptext><![CDATA[Use this option to enable or disable SME.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDMEM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_NUMA_memory_domains_per_socket">
+		<helptext><![CDATA[Select this option to configure the number of NUMA memory domains per socket. If LLC As NUMA Node is enabled, total NUMA node number depends on total CCX number.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDNPS</ev>
+		<length>1</length>
+		<value id="0x01">One_memory_domain_per_socket</value>
+		<value id="0x02">Two_memory_domains_per_socket</value>
+		<value id="0x03">Four_memory_domains_per_socket</value>
+		<value id="0x07">Auto</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Last-Level_Cache_As_NUMA_Node">
+		<helptext><![CDATA[.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x20">Enabled</value>
+		<mask>0x20</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Remap">
+		<helptext><![CDATA[Use this option to remap memory that may have been previously disabled from the system due to a failure event, such as an uncorrectable memory error.]]></helptext>			
+		<ev>CQHMAPIN</ev>
+		<length>1</length>
+		<value id="0x00">No_Action</value>
+		<value id="0x01">All_Memory</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Memory Options / Persistent Memory Options -->
+	<Section name="NVDIMM-N_Support">
+		<helptext><![CDATA[This option controls whether NVDIMM-N support (including backing up the contents of the memory to flash on power down/reset) is enabled.]]></helptext>			
+		<ev>CQHNVDIMM</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="NVDIMM-N_Interleaving">
+		<helptext><![CDATA[This option controls whether the NVDIMMs of type NVDIMM-N installed on a particular processor will be interleaved with each other in the memory map.]]></helptext>			
+		<ev>CQHNVDIMM</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x08">Enabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="NVDIMM-N_ACPI_Objects">
+		<helptext><![CDATA[When enabled, the Microsoft specific NVDIMM-N ACPI device objects will be generated.]]></helptext>			
+		<ev>CQHNVDIMM</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Persistent_Memory_Backup_Power_Policy">
+		<helptext><![CDATA[This option controls whether the system will wait during system boot for batteries to charge if sufficient battery backup power for the installed persistent memory is not available.]]></helptext>			
+		<ev>CQHNVDIMM</ev>
+		<length>2</length>
+		<value id="0x00">Wait_for_Backup_Power_on_Boot</value>
+		<value id="0x20">Continue_Boot_without_Backup_Power</value>
+		<value id="0x40">Use_External_Backup_Power</value>
+		<mask>0x60</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Persistent_Memory_Integrity_Check">
+		<helptext><![CDATA[When this option is enabled, persistent memory will be checked during system boot to determine data integrity.]]></helptext>			
+		<ev>CQHNVDIMM</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x02</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Persistent_Memory_Address_Range_Scrub">
+		<helptext><![CDATA[Use this option to configure the NVDIMM memory Address Range Scrub support.]]></helptext>			
+		<ev>CQHNVDIMM</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x20">Enabled</value>
+		<mask>0x20</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Virtualization Options -->
+	<Section name="Intel_VT">
+		<helptext><![CDATA[When enabled, a hypervisor or operating system supporting this option can use hardware capabilities provided by Intel VT.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_VT">
+		<helptext><![CDATA[When enabled, a hypervisor or operating system supporting this option can use hardware capabilities provided by AMD VT.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_IOMMU">
+		<helptext><![CDATA[If enabled, a hypervisor or operating system supporting this option can use hardware capabilities provided by AMD Virtualization for Directed I/O.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_VT-d">
+		<helptext><![CDATA[If enabled, a hypervisor or operating system supporting this option can use hardware capabilities provided by Intel VT for Directed I/O.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHIIO</ev>
+		<length>42</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Minimum_SEV_ASID">
+		<helptext><![CDATA[This option defines the number of AMD Secure Encrypted Virtualization (SEV) address space identifiers (ASID) that can be used for SEV enabled guests.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDSEV</ev>
+		<length>1</length>
+	</Section>
+	<Section name="Access_Control_Service">
+		<helptext><![CDATA[If enabled, Access Control Service is enabled for the downstream port.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHIIO</ev>
+		<length>44</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x08">Disabled</value>
+		<mask>0x08</mask>
+		<byte>43</byte>
+	</Section>
+	<Section name="SR-IOV">
+		<helptext><![CDATA[If enabled, SR-IOV support enables a hypervisor to create virtual instances of a PCI-express device, potentially increasing performance.]]></helptext>			
+		<ev>CQHSRIOV</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Boot Options -->
+	<Section name="Boot_Mode">
+		<helptext><![CDATA[Use this option to select the boot mode of the system. ]]></helptext>			
+		<ev>CQHBOOT</ev>
+		<length>2</length>
+		<value id="0x01">UEFI_Mode</value>
+		<value id="0x00">Legacy_BIOS_Mode</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="UEFI_Optimized_Boot">
+		<helptext><![CDATA[Set this option to disabled for compatibility with Microsoft Windows 2008 and Windows 2008 R2 operating systems on a system configured for UEFI Boot Mode. ]]></helptext>			
+		<ev>CQHBOOT</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Boot_Order_Policy">
+		<helptext><![CDATA[Use this option to configure how the system attempts to boot devices per the Boot Order when no bootable device is found.]]></helptext>			
+		<ev>CQHBOP</ev>
+		<length>1</length>
+		<value id="0x00">Retry_Boot_Order_Indefinitely</value>
+		<value id="0x01">Attempt_Boot_Order_Once</value>
+		<value id="0x02">Reset_After_Failed_Boot_Attempt</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Legacy_Boot_Order">
+		<ev>CQHIPL</ev>
+		<helptext><![CDATA[Legacy Boot Order. Current Initial ProgramLoad (IPL) device boot order. ]]></helptext>		
+		<length>16</length>
+	</Section>
+	<Section name="Legacy_Boot_Order_Size">
+		<ev>CQHNIPL</ev>
+		<helptext><![CDATA[Legacy Boot Order Size.  Current Initial ProgramLoad (IPL) device boot order size. ]]></helptext>		
+		<length>1</length>
+	</Section>
+	<Section name="Legacy_Boot_Controller_Order">
+		<helptext><![CDATA[Lists the current legacy boot controller ordering.]]></helptext>		
+		<ev>CQHORD</ev>
+		<length>120</length>
+		<record_size>8</record_size>
+		<Fields>
+			<Field>
+				<Field_name>Id</Field_name>
+				<Field_size>4</Field_size>
+				<Field_start>0</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Slot</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>4</Field_start>
+			</Field>	
+			<Field>
+				<Field_name>BusDev</Field_name>
+				<Field_size>2</Field_size>
+				<Field_start>5</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Rest</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>7</Field_start>
+			</Field>
+		</Fields>
+	</Section>
+	<Section name="Legacy_NIC_Boot_Order">
+		<ev>CQHBEV</ev>
+		<helptext><![CDATA[Legacy NIC Boot Order information. ]]></helptext>		
+		<length>160</length>
+		<empty_delete>1</empty_delete>
+		<record_size>8</record_size>
+		<Fields>
+			<Field>
+				<Field_name>Id</Field_name>
+				<Field_size>4</Field_size>
+				<Field_start>0</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Slot</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>4</Field_start>
+			</Field>	
+			<Field>
+				<Field_name>BusDev</Field_name>
+				<Field_size>2</Field_size>
+				<Field_start>5</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Rest</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>7</Field_start>
+			</Field>
+		</Fields>
+	</Section>
+<!-- Network Options / Network Boot Options -->
+	<Section name="Pre-Boot_Network_Environment">
+		<helptext><![CDATA[Use this option to set the preference for Pre-Boot Network.]]></helptext>			
+		<ev>CQHIPVX2</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">IPv4</value>
+		<value id="0x02">IPv6</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="IPv6_DHCP_Unique_Identifier">
+		<helptext><![CDATA[Use this option to control the IPv6 DHCP Unique Identifier (DUID).]]></helptext>			
+		<ev>CQHDUID</ev>
+		<length>1</length>
+		<value id="0x04">Auto</value>
+		<value id="0x01">DUID-LLT</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Network_Boot_Retry_Support">
+		<helptext><![CDATA[Use this option to configure the Network Boot Retry Support.]]></helptext>			
+		<ev>CQHNBR</ev>
+		<length>2</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Network_Boot_Retry_Count">
+		<helptext><![CDATA[Use this option to control the number of times a network device is attempted for boot.]]></helptext>			
+		<ev>CQHNBR</ev>
+		<length>2</length>
+		<byte>1</byte>
+	</Section>
+	<Section name="UEFI_HTTP_Boot">
+		<helptext><![CDATA[Use this option to control the UEFI HTTP Boot support.]]></helptext>			
+		<ev>CQHHTTP</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Auto</value>
+		<value id="0x02">HTTP_only</value>
+		<value id="0x03">HTTPS_only</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="UEFI_iSCSI_Boot_Policy">
+		<helptext><![CDATA[Use this option to set the iSCSI Boot Policy.]]></helptext>			
+		<ev>CQHISCSIBP</ev>
+		<length>1</length>
+		<value id="0x00">Software_Initiator</value>
+		<value id="0xFF">Adapter_Initiator</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Embedded_Network_Boot">
+		<helptext><![CDATA[Raw data bytes that include data for disabling network boot for embedded NIC ports. One byte per port. 01=Enabled. 00=Disabled.]]></helptext>			
+		<ev>CQHNIC</ev>
+		<length>18</length>
+	</Section>
+	<Section name="PCIe_Slot_Network_Boot">
+		<helptext><![CDATA[Raw data bytes that include data for disabling network boot for UEFI PCIe NIC Slots/Ports. Two bytes per slot. One bit per port. 1=Enabled. 0=Disabled. 01 00 = Slot 1 Port 1 Enabled.]]></helptext>
+		<ev>CQHSNIC</ev>
+		<length>64</length>
+	</Section>
+<!-- Network Options / Pre-Boot Network Settings -->
+	<Section name="Pre-Boot_Network_Interface">
+		<helptext><![CDATA[Raw data bytes for selecting which NIC/Port is used for the Pre-Boot Network. First byte, second byte is reserved. 00 - Auto.]]></helptext>			
+		<ev>CQHPBNIC</ev>
+		<length>2</length>
+	</Section>
+	<Section name="Pre-Boot_Network_Proxy">
+		<helptext><![CDATA[Use this option to configure pre-boot network proxy.]]></helptext>			
+		<ev>CQSNETPROXY</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_DHCPv4">
+		<helptext><![CDATA[When enabled, this option enables obtaining the pre-boot network IPv4 configuration from a DHCP server.]]></helptext>			
+		<ev>CQHNET4DHCP</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Pre-Boot_IPv4_Address">
+		<helptext><![CDATA[Use this option to specify the pre-boot network IPv4 address.]]></helptext>		
+		<ev>CQSNET4IP</ev>
+		<length>16</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv4_Subnet_Mask">
+		<helptext><![CDATA[Use this option to specify the pre-boot network subnet mask.]]></helptext>		
+		<ev>CQSNET4MSK</ev>
+		<length>16</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv4_Gateway">
+		<helptext><![CDATA[Use this option to specify the pre-boot network gateway IPv4 address.]]></helptext>		
+		<ev>CQSNET4GWY</ev>
+		<length>16</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv4_Primary_DNS">
+		<helptext><![CDATA[Use this option to specify the pre-boot network Primary DNS Server IPv4 address.]]></helptext>		
+		<ev>CQSNET4DNS1</ev>
+		<length>16</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv4_Secondary_DNS">
+		<helptext><![CDATA[Use this option to specify the pre-boot network Secondary DNS Server IPv4 address.]]></helptext>		
+		<ev>CQSNET4DNS2</ev>
+		<length>16</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv6_Config_Policy">
+		<helptext><![CDATA[When set to Automatic, this option enables obtaining the pre-boot network IPv6 configuration automatically.]]></helptext>			
+		<ev>CQHNET6POLICY</ev>
+		<length>1</length>
+		<value id="0x00">Automatic</value>
+		<value id="0x01">Manual</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Pre-Boot_IPv6_Address">
+		<helptext><![CDATA[Use this option to specify the pre-boot network IPv6 address.]]></helptext>		
+		<ev>CQSNET6IP</ev>
+		<length>40</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv6_Gateway">
+		<helptext><![CDATA[Use this option to specify the pre-boot network gateway IPv6 address.]]></helptext>		
+		<ev>CQSNET6GWY</ev>
+		<length>40</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv6_Primary_DNS">
+		<helptext><![CDATA[Use this option to specify the pre-boot network Primary DNS Server IPv6 address.]]></helptext>		
+		<ev>CQSNET6DNS1</ev>
+		<length>40</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_IPv6_Secondary_DNS">
+		<helptext><![CDATA[Use this option to specify the pre-boot network Secondary DNS Server IPv6 address.]]></helptext>		
+		<ev>CQSNET6DNS2</ev>
+		<length>40</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_Boot_from_URL_1">
+		<helptext><![CDATA[Use this option to configure a network URL to a bootable ISO or EFI file.]]></helptext>		
+		<ev>CQSBOOTURL</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_Boot_from_URL_2">
+		<helptext><![CDATA[Use this option to configure a network URL to a bootable ISO or EFI file.]]></helptext>		
+		<ev>CQSBOOTURL2</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_Boot_from_URL_3">
+		<helptext><![CDATA[Use this option to configure a network URL to a bootable ISO or EFI file.]]></helptext>		
+		<ev>CQSBOOTURL3</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+	<Section name="Pre-Boot_Boot_from_URL_4">
+		<helptext><![CDATA[Use this option to configure a network URL to a bootable ISO or EFI file.]]></helptext>		
+		<ev>CQSBOOTURL4</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+<!-- Network Options / iSCSI Configuration - NOT SUPPORTED by Conrep -->
+
+
+<!-- Network Options / VLAN Configuration -->
+	<Section name="VLAN_Settings">
+		<helptext><![CDATA[Setting the VLAN Control(01=Enabled), VLAN ID, and VLAN Priority.]]></helptext>		
+		<ev>CQHVLAN</ev>
+		<length>4</length>
+		<record_size>4</record_size>
+		<Fields>
+			<Field>
+				<Field_name>Control</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>0</Field_start>
+			</Field>
+			<Field>
+				<Field_name>VLAN_ID</Field_name>
+				<Field_size>2</Field_size>
+				<Field_start>1</Field_start>
+			</Field>
+			<Field>
+				<Field_name>VLAN_Priority</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>3</Field_start>
+			</Field>
+		</Fields>
+	</Section>
+
+<!-- Network Options / Embedded iPXE -->
+	<Section name="Embedded_iPXE">
+		<helptext><![CDATA[Use this option to enable or disable the Embedded iPXE.]]></helptext>			
+		<ev>CQHIPXE</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="iPXE Script Auto-Start">
+		<helptext><![CDATA[Use this option to enable or disable execution of the user supplied startup script for the Embedded iPXE.]]></helptext>			
+		<ev>CQHIPXE</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Add_Embedded_iPXE_to_Boot_Order">
+		<helptext><![CDATA[When enabled, this option adds the Embedded iPXE as an entry in the UEFI Boot Order list.]]></helptext>			
+		<ev>CQHIPXE</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="iPXE_Script_Verification">
+		<helptext><![CDATA[Use this option to enable or disable execution of the user supplied startup script for the Embedded iPXE.]]></helptext>			
+		<ev>CQHIPXE</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x20">Enabled</value>
+		<mask>0x20</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="iPXE_Auto-Start_Script_Location">
+		<helptext><![CDATA[Use this option to select the location of the Embedded iPXE startup script.]]></helptext>			
+		<ev>CQHIPXE</ev>
+		<length>1</length>
+		<value id="0x00">File_Systems_on_Attached_Media</value>
+		<value id="0x08">Network_Location</value>
+		<value id="0x10">Auto</value>
+		<mask>0x18</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Network_Location_for_iPXE_Auto-Start_Script">
+		<helptext><![CDATA[Use this option to configure a network URL to a iPXE startup script.]]></helptext>		
+		<ev>CQSIPXEURI</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+<!-- Storage Options -->
+	<Section name="Fibre_Channel/FCoE_Scan_Policy">
+		<helptext><![CDATA[Use this option to change the default Fibre Channel or FCoE policy for scanning for boot targets.]]></helptext>			
+		<ev>CQHFCSCAN</ev>
+		<length>1</length>
+		<value id="0x00">Scan_Configured_Targets_Only</value>
+		<value id="0x01">Scan_All_Targets</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Storage Options / SATA Controller Options -->
+	<Section name="Embedded_SATA_Configuration">
+		<helptext><![CDATA[Use this option to configure the embedded chipset SATA controller for AHCI or RAID modes.]]></helptext>			
+		<ev>CQHATA</ev>
+		<length>6</length>
+		<value id="0x02">Enable_AHCI_Support</value>
+		<value id="0x01">Enable_RAID_Support</value>
+		<mask>0x03</mask>
+		<byte>3</byte>
+	</Section>
+	<Section name="SATA_Secure_Erase">
+		<helptext><![CDATA[Use this option to control whether Secure Erase functionality is supported.]]></helptext>			
+		<ev>CQHATA</ev>
+		<length>6</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x04</mask>
+		<byte>5</byte>
+	</Section>
+	<Section name="SATA_Sanitize">
+		<helptext><![CDATA[Use this option to control whether sanitize functionality is supported.]]></helptext>			
+		<ev>CQHATA</ev>
+		<length>6</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x10">Enabled</value>
+		<mask>0x10</mask>
+		<byte>5</byte>
+	</Section>
+<!-- Storage Options / Embedded Storage Boot Policy -->
+	<Section name="Embedded_Storage_Boot_Policy">
+		<helptext><![CDATA[Raw data bytes for setting the Embedded Storage Boot Policy. 00 = Boot all targets. FF = Boot no targets. 03 = Boot a maximum of 3 targets. 18 = Boot a maximum of 24 targets.]]></helptext>			
+		<ev>CQHDISK</ev>
+		<length>2</length>
+	</Section>
+<!-- Storage Options / PCIe Slot Storage Boot Policy -->
+	<Section name="PCIe_Slot_Storage_Boot_Policy">
+		<helptext><![CDATA[Raw data bytes for setting the PCIe Slot Storage Boot Policy. 00 = Boot all targets. FF = Boot no targets. 03 = Boot a maximum of three targets.]]></helptext>			
+		<ev>CQHSDISK</ev>
+		<length>32</length>
+	</Section>
+<!-- Storage Options / NVM Express Options -->
+	<Section name="Embedded_NVM_Express_Option_ROM">
+		<helptext><![CDATA[Use this option to enable or disable embedded NVM Express Option ROM.]]></helptext>			
+		<ev>CQHNVMEOPTROM</ev>
+		<length>1</length>
+		<value id="0x01">Disabled</value>
+		<value id="0x00">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_VMD_Technology_Support">
+		<helptext><![CDATA[Use this option to Enable/Disable Intel Volume Management Device support for NVMe.]]></helptext>			
+		<ev>CQHVMD</ev>
+		<length>9</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>8</byte>
+	</Section>
+	<Section name="Intel_VMD_Direct_Assign">
+		<helptext><![CDATA[Use this option when you want to pass the VMD controller through to a virtual machine]]></helptext>			
+		<ev>CQHVMD</ev>
+		<length>9</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0x40</mask>
+		<byte>8</byte>
+	</Section>
+
+<!-- Power and Performance Options -->
+	<Section name="Power_Regulator">
+		<helptext><![CDATA[Use this option to configure the following Power Regulator support.]]></helptext>
+		<ev>CQHPER</ev>
+		<length>4</length>
+		<value id="0x00">OS_Control_Mode</value>
+		<value id="0x01">Static_Low_Power_Mode</value>
+		<value id="0x02">Dynamic_Power_Savings_Mode</value>
+		<value id="0x03">Static_High_Performance_Mode</value>
+		<mask>0x03</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Minimum_Processor_Idle_Power_Core_C-State">
+		<helptext><![CDATA[Use this option to select the lowest idle power state (C-state) of the processor that the operating system uses.]]></helptext>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">No_C-states</value>
+		<value id="0x04">C1E_State</value>
+		<value id="0x05">C3_State</value>
+		<value id="0x07">C6_State</value>
+		<mask>0x07</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Minimum_Processor_Idle_Power_Package_C-State">
+		<helptext><![CDATA[Use this option to select the lowest idle package power state (C-state) of the processor.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">No_Package_State</value>
+		<value id="0x04">Package_C6_(non-retention)_State</value>
+		<value id="0x08">Package_C6_(retention)_State</value>
+		<mask>0x0C</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_Turbo_Boost_Technology">
+		<helptext><![CDATA[Turbo Boost Technology enables the processor to transition to a higher frequency than the processor's rated speed if the processor has available power and is within temperature specifications.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Core_Performance_Boost">
+		<helptext><![CDATA[AMD Core Performance Boost enables the processor to transition to a higher frequency than the processor's rated speed if the processor has available power and is within temperature specifications.]]></helptext>
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Energy/Performance_Bias">
+		<helptext><![CDATA[Use this option to configure several processor subsystems to optimize the performance and power usage of the processor.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Maximum_Performance</value>
+		<value id="0x10">Balanced_Performance</value>
+		<value id="0x20">Balanced_Power</value>
+		<value id="0x30">Power_Savings_Mode</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_AVX_P1">
+		<helptext><![CDATA[Use this option to override the default CPU policy for SSE, AVX, and AVX-512 deterministic frequencies.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Normal</value>
+		<value id="0x08">Level1</value>
+		<value id="0x18">Level2</value>
+		<mask>0x18</mask>
+		<byte>1</byte>
+	</Section> 
+<!-- Added -->
+	<Section name="Intel_Collaborative_Power_Control">
+		<helptext><![CDATA[For OSes that support the Processor Clocking Control Interface, enabling this option allows the OS to request processor frequency changes even when the server has the Power Regulator option configured for Dynamic Power Savings Mode.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHPCC</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_DMI_Link_Frequency">
+		<helptext><![CDATA[Use this option to force the link speed between the processor and the southbridge to run at slower speeds to save power.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHIIO</ev>
+		<length>42</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">Gen_1_Speed</value>
+		<value id="0x02">Gen_2_Speed</value>
+		<mask>0x0F</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="NUMA_Group_Size_Optimization">
+		<helptext><![CDATA[Use this option to configure how the System ROM reports the size of a NUMA node (number of logical processors), which assists the Operating System in grouping processors for application use (referred to as Kgroups).]]></helptext>
+		<ev>CQHNUMA</ev>
+		<length>1</length>
+		<value id="0x00">Clustered</value>
+		<value id="0x01">Flat</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_Performance_Monitoring_Support">
+		<helptext><![CDATA[This option does not impact performance. When enabled, this option exposes certain chipset devices that can be used with the Intel Performance Monitoring Toolkit.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHPCM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Performance_Monitoring_Support">
+		<helptext><![CDATA[This option does not impact performance. When enabled, this option exposes certain chipset devices that can be used with the AMD Performance Monitoring Toolkit.]]></helptext>
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHPCM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Uncore_Frequency_Scaling">
+		<helptext><![CDATA[This option controls the frequency scaling of the processor's internal busses (the uncore).]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHPER</ev>
+		<length>4</length>
+		<value id="0x00">Auto</value>
+		<value id="0x20">Maximum</value>
+		<value id="0x40">Minimum</value>
+		<mask>0xE0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_TSX_Support">
+		<helptext><![CDATA[This option can be used to configure the processor Transactional Synchronization Extensions (TSX) support.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHPER</ev>
+		<length>4</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x04">Disabled</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Sub-NUMA_Clustering">
+		<helptext><![CDATA[When enabled, Sub-NUMA Clustering divides the processor's cores, cache, and memory into multiple NUMA domains. Enabling this feature can increase performance for workloads that are NUMA aware and optimized.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Energy_Efficient_Turbo">
+		<helptext><![CDATA[This option controls whether the processor uses an energy efficiency based policy when engaging turbo range frequencies. This option is only applicable when Turbo Mode is enabled.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x40">Disabled</value>
+		<mask>0x40</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Local/Remote_Threshold">
+		<helptext><![CDATA[Local/Remote Threshold setting.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x10">Auto</value>
+		<value id="0x20">Low</value>
+		<value id="0x30">Medium</value>
+		<value id="0x40">High</value>
+		<mask>0xF0</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="LLC_Dead_Line_Allocation">
+		<helptext><![CDATA[Enabled - Opportunistically fill dead lines in LLC. Disabled - Never fill dead lines in LLC.]]></helptext>
+		<ev>CQHMPL2</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Stale_A_to_S">
+		<helptext><![CDATA[Stale A to S directory optimization.]]></helptext>
+		<ev>CQHMPL2</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Power and Performance Options / Processor Prefetcher Options -->
+	<Section name="HW_Prefetcher">
+		<helptext><![CDATA[Use this option to disable the processor HW prefetch feature.]]></helptext>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Adjacent_Sector_Prefetch">
+		<helptext><![CDATA[Use this option to disable the processor Adjacent Sector Prefetch feature.]]></helptext>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x10">Enabled</value>
+		<mask>0x30</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="DCU_Stream_Prefetcher">
+		<helptext><![CDATA[Use this option to disable the processor DCU Stream Prefetcher feature.]]></helptext>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="DCU_IP_Prefetcher">
+		<helptext><![CDATA[Use this option to disable the processor DCU IP Prefetcher feature.]]></helptext>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>2</byte>
+	</Section>
+	<Section name="LLC_Prefetch">
+		<helptext><![CDATA[Use this option to configure the processor Last Level Cache (LLC) prefetch feature.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="XPT_Prefetcher">
+		<helptext><![CDATA[Use this option to disable the processor XPT Prefetch feature. In some cases, setting this option to disabled can improve performance.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Auto</value>
+		<value id="0x08">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="AMD_L1_Stream_HW_Prefetcher">
+		<helptext><![CDATA[Use this option to disable L1 Stream HW prefetch feature. In some cases, setting this option to disabled can improve performance. Typically, setting this option to enabled provides better performance.]]></helptext>
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x04">Disabled</value>
+		<value id="0x00">Enabled</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_L2_Stream_HW_Prefetcher">
+		<helptext><![CDATA[Use this option to disable L2 Stream HW prefetch feature. In some cases, setting this option to disabled can improve performance. Typically, setting this option to enabled provides better performance.]]></helptext>
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x08">Disabled</value>
+		<value id="0x00">Enabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="AMD_Virtual_DRTM_Device">
+		<helptext><![CDATA[Use this option to enable or disable the AMD Virtual DRTM Device.]]></helptext>
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMD</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0x40</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Power and Performance Options / I/O Options -->
+	<Section name="ACPI_SLIT">
+		<helptext><![CDATA[The ACPI SLIT (System Locality Information Table) defines the relative access times between processors, memory subsystems, and I/O subsystems.]]></helptext>
+		<ev>CQHSLT</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_NIC_DMA_Channels_(IOAT)">
+		<helptext><![CDATA[Use this option to select the Intel NIC DMA Channels support. This is a NIC acceleration option that runs only on Intel-based NICs.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHIIO</ev>
+		<length>42</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Proximity_Reporting_for_I/O">
+		<helptext><![CDATA[When enabled, the System ROM reports the proximity relationship between I/O devices and system memory to the operating system.]]></helptext>
+		<ev>CQHPXM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="I/O_Non-posted_Prefetching">
+		<helptext><![CDATA[DEPRECATED: This option is not valid for Gen10 servers. This setting can be ignored.]]></helptext>
+		<ev>CQHIOPK</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Power and Performance Options / DRAM RAPL Options -->
+	<Section name="DRAM_RAPL_Reporting_Support">
+		<helptext><![CDATA[When enabled, this option enables DRAM Power Reporting.  When disabled, this option disables DRAM Power Reporting.]]></helptext>
+		<ev>CQHDRAMPOWER</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="DRAM_RAPL_Limiting_Support">
+		<helptext><![CDATA[Use this option to set the type of DRAM RAPL Limiting support.]]></helptext>
+		<ev>CQHDRAMPOWER</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">BIOS_Control_Mode</value>
+		<value id="0x04">OS_Control_Mode</value>
+		<mask>0x06</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="DRAM_RAPL_wattage_value">
+		<helptext><![CDATA[First 4 bytes/values is the wattage value. This is a per socket DRAM RAPL value applicable for all populated sockets in the system. Modify DRAM RAPL wattage value in milliwatts, as instructed by qualified personnel.]]></helptext>
+		<ev>CQHRAPLD</ev>
+		<length>36</length>
+	</Section>
+<!-- Power and Performance Options / Intel UPI Options -->
+	<Section name="Intel_UPI_Link_Enablement">
+		<helptext><![CDATA[Use this option to configure the UPI topology to use fewer links between processors, when available.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHQPI</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x10">Single_Link_Operation</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_UPI_Link_Power_Management">
+		<helptext><![CDATA[Use this option to place the Ultra Path Interconnect (UPI) links into a low power state when the links are not being used.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x10">Enabled</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_UPI_Link_Frequency">
+		<helptext><![CDATA[Use this option to set the UPI Link frequency to a lower speed. Running at a lower frequency can reduce power consumption, but can also affect system performance. ]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL</ev>
+		<length>2</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">Min_UPI_Speed</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="UPI_Prefetcher">
+		<helptext><![CDATA[Use this option to disable the processor UPI Prefetch feature. In some cases, setting this option to disabled can improve performance.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x03</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Direct_To_UPI_(D2K)">
+		<helptext><![CDATA[.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHMPL2</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x10">Enabled</value>
+		<value id="0x20">Disabled</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Power and Performance Options / Advanced Performance Tuning Options -->
+	<Section name="Processor_Jitter_Control">
+		<helptext><![CDATA[Processor Jitter Control allows the customer to manage processor frequency variance due to technologies such as Turbo which vary the frequency based on power, thermals, and active cores.]]></helptext>		
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHJITTER</ev>
+		<length>13</length>
+		<record_size>13</record_size>
+		<Fields>
+			<Field>
+				<Field_name>Mode</Field_name>
+				<Field_size>1</Field_size>
+				<Field_start>0</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Frequency</Field_name>
+				<Field_size>4</Field_size>
+				<Field_start>1</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Threshold</Field_name>
+				<Field_size>4</Field_size>
+				<Field_start>5</Field_start>
+			</Field>
+			<Field>
+				<Field_name>Poll_Rate</Field_name>
+				<Field_size>4</Field_size>
+				<Field_start>9</Field_start>
+			</Field>
+		</Fields>
+	</Section>
+	<Section name="Processor_Jitter_Control_Optimization">
+		<helptext><![CDATA[This option optimizes the thresholds used when the Auto-tuned function detects fluctuations in processor frequency.]]></helptext>
+		<ev>CQHJITTER2</ev>
+		<length>1</length>
+		<value id="0x00">Zero_Latency</value>
+		<value id="0x01">Optimized_for_Latency</value>
+		<value id="0x02">Optimized_for_Throughput</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Core_Boosting">
+		<helptext><![CDATA[Use this option to enable the Core Boosting technology to increase processor performance on qualified processors.]]></helptext>
+		<ev>CQHIPTCB</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Processor_Power_Adjustment">
+		<helptext><![CDATA[Enabling this option requires that the Thermal Configuration be set to Enhancement CPU Cooling or Maximum Cooling..]]></helptext>
+		<ev>CQHIPTCB</ev>
+		<length>8</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xFF</mask>
+		<byte>7</byte>
+	</Section>
+	<Section name="Processor_Config_TDP_Level">
+		<helptext><![CDATA[Use this option to override the default CPU policy for SSE, AVX, and AVX-512 deterministic frequencies.  This will result in lowering the deterministic operational frequency (P1) based on the setting.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Normal</value>
+		<value id="0x08">Level_1</value>
+		<value id="0x10">Level_2</value>
+		<mask>0x18</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="PCI_Peer_to_Peer_Serialization">
+		<helptext><![CDATA[Select this option to configure the PCIe Peer to Peer Serialization Option.]]></helptext>
+		<ev>CQHMPL2</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0xC0</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_Speed_Select_Config_Level">
+		<helptext><![CDATA[Use this option to Select a particular Intel Speed Select Configuration.  This will result in Increasing the CPU Base Frequency based on the setting.]]></helptext>
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPOWER</ev>
+		<length>2</length>
+		<value id="0x00">Base</value>
+		<value id="0x60">Config_1</value>
+		<value id="0x80">Config_2</value>
+		<mask>0xE0</mask>
+		<byte>1</byte>
+	</Section>
+<!-- Power and Performance Options / Advanced Power Options -->
+	<Section name="Redundant_Power_Supply_Mode">
+		<helptext><![CDATA[Use this option to configure how the system handles redundant power supply configurations.]]></helptext>					
+		<ev>CQHHEM</ev>
+		<length>1</length>
+		<value id="0x00">Balanced_Mode</value>
+		<value id="0x11">High_Efficiency_Mode_(Auto)</value>
+		<value id="0x13">High_Efficiency_Mode_(Odd_Supply_Standby)</value>
+		<value id="0x15">High_Efficiency_Mode_(Even_Supply_Standby)</value>
+		<mask>0x17</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Embedded UEFI Shell -->
+	<Section name="Embedded_UEFI_Shell">
+		<helptext><![CDATA[Use this option to enable or disable the Embedded UEFI Shell.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Add_Embedded_UEFI_Shell_to_Boot_Order">
+		<helptext><![CDATA[When enabled, this option adds the Embedded UEFI Shell as an entry in the UEFI Boot Order list.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x08">Enabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="UEFI_Shell_Script_Auto-Start">
+		<helptext><![CDATA[Use this option to enable or disable automatic execution of the default startup script for the Embedded UEFI Shell.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Physical_Presence_with_Keystroke">
+		<helptext><![CDATA[Use the option to enable or disable Physical Presence with Keystroke.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Shell_Script_Verification">
+		<helptext><![CDATA[Enable this option to allow verification of UEFI shell script files, if Secure Boot is enabled.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x80">Enabled</value>
+		<mask>0x80</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Shell_Auto-Start_Script_Location">
+		<helptext><![CDATA[Use this option to select the location of the Embedded UEFI Shell startup script.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>1</length>
+		<value id="0x00">File_Systems_on_Attached_Media</value>
+		<value id="0x10">Network_Location</value>
+		<value id="0x20">Auto</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Discover_Shell_Auto-Start_Script_using_DHCP">
+		<helptext><![CDATA[Use this option to let the Shell discover its startup script URL using DHCP.]]></helptext>
+		<ev>CQHSHELL</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0x40</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Network_Location_for_Shell_Auto-Start_Script">
+		<helptext><![CDATA[Use this option to configure a network URL to a UEFI Shell startup script.]]></helptext>		
+		<ev>CQSSHELLURI</ev>
+		<length>255</length>
+		<format>text</format>
+	</Section>
+<!-- Server Security -->
+	<Section name="Platform_Certificate_Support">
+		<helptext><![CDATA[Enable/Disable Platform Certificate Support.]]></helptext>
+		<ev>CQHPLATCERT</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intel_TXT_Support">
+		<helptext><![CDATA[Use this option to modify Intel TXT support.]]></helptext>			
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x10">Enabled</value>
+		<mask>0x30</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Allow_login_with_iLO_accounts">
+		<helptext><![CDATA[Allows users to login with an iLO account with the CONFIGURE_BIOS privilege.]]></helptext>
+		<ev>CQHILOUSR</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="One-Time_Boot_Menu_(F11 Prompt)">
+		<helptext><![CDATA[Use this option to disable the POST One-Time Boot F11 Prompt.]]></helptext>
+		<ev>CQHHTKEY</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x10">Disabled</value>
+		<mask>0x10</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Intelligent_Provisioning_(F10 Prompt)">
+		<helptext><![CDATA[Use this option to enable or disable the Intelligent Provisioning functionality.]]></helptext>
+		<ev>CQHHTKEY</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x08">Disabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="System_Intrusion_Detection">
+		<helptext><![CDATA[Enabled/Disabled System Intrusion Detection.]]></helptext>
+		<ev>CQHSEC</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Microsoft_Secured-core_Support">
+		<helptext><![CDATA[Use this option to configure the server for Microsoft(R) Secured-core Support]]></helptext>
+		<ev>CQHSEC</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x08">Enabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Processor_AES-NI_Support">
+		<helptext><![CDATA[Use this option to enable or disable the Advanced Encryption Standard Instruction Set (AES-NI) in the processor.]]></helptext>
+		<ev>CQHSKTPROC</ev>
+		<length>20</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x04">Enabled</value>
+		<mask>0x0C</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Backup_ROM_Image_Authentication">
+		<helptext><![CDATA[Use this option to enable crypticgraphic authentication of the backup ROM image on startup.]]></helptext>
+		<ev>CQHREDROM</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x08">Enabled</value>
+		<mask>0x08</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Total_Memory_Encryption">
+		<helptext><![CDATA[Enable/Disable Total Memory Encryption (TME).]]></helptext>
+		<ev>CQHSGX</ev>
+		<length>3</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x40">Enabled</value>
+		<mask>0x40</mask>
+		<byte>2</byte>
+	</Section>
+<!-- Server Security / Intel Software Guard Extensions (SGX) is not supported with Conrep -->
+
+	
+<!-- Server Security / Trusted Platform Module Options -->
+	<Section name="TPM_20_Operation">
+		<helptext><![CDATA[Use this option to perform a clear operation on the TPM.]]></helptext>
+		<ev>CQHTPM</ev>
+		<length>32</length>
+		<value id="0x00">No_Action</value>
+		<value id="0xF9">Enable</value>
+		<value id="0xFA">Disable</value>
+		<value id="0x16">Clear</value>
+		<mask>0xFF</mask>
+		<byte>4</byte>
+	</Section>
+	<Section name="TPM_20_Software_Interface_Operation">
+		<helptext><![CDATA[TPM 2.0 Software Interface Operation: FIFO or CRB.]]></helptext>
+		<ev>CQHTPM</ev>
+		<length>32</length>
+		<value id="0x00">No_Action</value>
+		<value id="0x04">FIFO_interface</value>
+		<value id="0x08">CRB_interface</value>
+		<mask>0x0C</mask>
+		<byte>10</byte>
+	</Section>
+	<Section name="TPM_Visibility">
+		<helptext><![CDATA[Use this option to hide TPM from the operating system. When the TPM is hidden, BIOS secure startup is disabled, and the TPM does not respond to any commands.]]></helptext>
+		<ev>CQHTPM</ev>
+		<length>32</length>
+		<value id="0x00">Visible</value>
+		<value id="0x01">Hidden</value>
+		<mask>0x01</mask>
+		<byte>3</byte>
+	</Section>
+	<Section name="TPM_UEFI_Option_ROM_Measurement">
+		<helptext><![CDATA[Use this option to enable measuring the UEFI PCI option ROMs. Disabling this option skips measuring the UEFI PCI option ROMs.]]></helptext>
+		<ev>CQHTPM</ev>
+		<length>32</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x02</mask>
+		<byte>3</byte>
+	</Section>
+<!-- PCIe Device Configuration -->
+	<Section name="NVMe_PCIe_Resource_Padding">
+		<helptext><![CDATA[Use this option to configure PCIe resources to support PCIe hot-add for NVMe drives.]]></helptext>
+		<ev>CQHPCIPAD</ev>
+		<length>1</length>
+		<value id="0x00">Normal</value>
+		<value id="0x01">Medium</value>
+		<value id="0x02">High</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Maximum_PCI_Express_Speed">
+		<helptext><![CDATA[This option enables you to lower the maximum PCI Express speed at which the server allows PCI Express devices to operate.]]></helptext>
+		<ev>CQHPLSG</ev>
+		<length>1</length>
+		<value id="0x00">Per_Port_Control</value>
+		<value id="0x01">PCIe_Generation_1.0</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="PCIe_Device_Disable_Embedded_Mezz">
+		<helptext><![CDATA[Raw data bytes that include data for disabling PCIe devices. Embedded and Blade Mezzanine card are included in this section. Different bit for each device. 0=Enabled. 1=Disabled.]]></helptext>
+		<ev>CQHDVX2</ev>
+		<length>6</length>
+	</Section>
+	<Section name="PCIe_Device_Disable_SATA_Slots">
+		<helptext><![CDATA[Raw data bytes that include data for disabling PCIe devices. SATA Controllers and PCIe Slots are included in this section. Different bit for each device. 0=Enabled. 1=Disabled.]]></helptext>
+		<ev>CQHDVS</ev>
+		<length>7</length>
+	</Section>
+	<Section name="PCIe_Bifurcation_Options">
+		<helptext><![CDATA[Raw data bytes that include setting the PCIe Bifurcation for slots and mezz cards. Three options - Auto, Bifurcate, and Dual Bifurcate.]]></helptext>
+		<ev>CQHSPCI2</ev>
+		<length>192</length>
+	</Section>
+	<Section name="PCIe_MCTP_Options">
+		<helptext><![CDATA[Raw data bytes for Enable/Disable MCTP for each PCIe slot. Different bit for each slot. 0=Enabled. 1=Disabled.]]></helptext>
+		<ev>CQHMCTP</ev>
+		<length>4</length>
+	</Section>
+<!-- Advanced Options -->
+	<Section name="ROM_Selection">
+		<helptext><![CDATA[Use this option to revert the server to a previous BIOS ROM image.]]></helptext>
+		<ev>CQHREDROM</ev>
+		<length>1</length>
+		<value id="0x00">Use_Current_ROM</value>
+		<value id="0x04">Switch_to_Backup_ROM</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Embedded_Video_Connection">
+		<helptext><![CDATA[When configured for Auto mode, the external video connection to the embedded video controller is automatically disabled to save power when a monitor is not attached.]]></helptext>
+		<ev>CQHEVC</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">Always_Disabled</value>
+		<value id="0x02">Always_Enabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Consistent_Device_Naming">
+		<helptext><![CDATA[Use this option to select the level of Consistent Device Naming.]]></helptext>
+		<ev>CQHACPICDN</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">CDN_Support_for_LOMs_Only</value>
+		<value id="0x03">CDN_Support_for_LOMs_and_Slots</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Mixed_Power_Supply_Reporting">
+		<helptext><![CDATA[When enabled, the server logs a message that a mixed power supply configuration is present.]]></helptext>
+		<ev>CQHMPSS</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="High_Precision_Event_Timer_(HPET)_ACPI_Support">
+		<helptext><![CDATA[Use this option to disable the High Precision Event Timer (HPET) table and device object in ACPI.]]></helptext>
+		<ev>CQHHPET</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="POST_Screen_Mode">
+		<helptext><![CDATA[Select the mode to display during POST stage.]]></helptext>
+		<ev>CQHPOSTMODE</ev>
+		<length>1</length>
+		<value id="0x00">Verbose_Mode</value>
+		<value id="0x01">Quiet_Mode</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Power_Supply_Requirements">
+		<helptext><![CDATA[Use this option to configure the power supply redundancy logic.]]></helptext>					
+		<ev>CQHRPSM</ev>
+		<length>1</length>
+		<value id="0x03">Configured_for_4+0_Redundancy</value>
+		<value id="0x02">Configured_for_3+1_Redundancy</value>
+		<value id="0x01">Configured_for_2+2_Redundancy</value>
+		<value id="0x00">Configured_for_1+1_Redundancy</value>
+		<mask>0x0F</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Advanced Options / Fan and Thermal Options -->
+	<Section name="Thermal_Configuration">
+		<helptext><![CDATA[Use this option to select the fan cooling solution for the system.]]></helptext>
+		<ev>CQHFANS</ev>
+		<length>1</length>
+		<value id="0x01">Optimal_Cooling</value>
+		<value id="0x02">Increased_Cooling</value>
+		<value id="0x03">Maximum_Cooling</value>
+		<value id="0x04">Enhanced_CPU_Cooling</value>
+		<mask>0x07</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Thermal_Shutdown">
+		<helptext><![CDATA[Use this option to control the reaction of the system to caution level thermal events.]]></helptext>
+		<ev>CQHCSM</ev>
+		<length>7</length>
+		<value id="0x01">Enabled</value>
+		<value id="0x00">Disabled</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Fan_Installation_Requirements">
+		<helptext><![CDATA[Use this option to configure how the server reacts when all required fans are not installed.]]></helptext>
+		<ev>CQHTHERM</ev>
+		<length>2</length>
+		<value id="0x00">Enable_Messaging</value>
+		<value id="0x01">Disable_Messaging</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Fan_Failure_Policy">
+		<helptext><![CDATA[Use this option to configure how the server reacts when fans fail resulting in the server not having required fans in operation.]]></helptext>
+		<ev>CQHTHERM</ev>
+		<length>2</length>
+		<value id="0x00">Shutdown/Halt_on_Critical_Fan_Failures</value>
+		<value id="0x02">Allow_Operation_with_Critical_Fan_Failures</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Extended_Ambient_Temperature_Support">
+		<helptext><![CDATA[Use this option to enable the server to operate at higher ambient temperatures than normally supported.]]></helptext>
+		<ev>CQHTHERM</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled_for_40c_Ambient_(ASHRAE_3)</value>
+		<value id="0x02">Enabled_for_45c_Ambient_(ASHRAE_4)</value>
+		<mask>0xFF</mask>
+		<byte>1</byte>
+	</Section>
+<!-- Advanced Options / Advanced Debug Options -->
+	<Section name="UEFI_Serial_Debug_Message_Level">
+		<helptext><![CDATA[Use this option to enable UEFI Serial Debug output and verbosity level.]]></helptext>
+		<ev>CQHDBG</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Errors_Only</value>
+		<value id="0x02">Medium</value>
+		<value id="0x03">Network</value>
+		<value id="0x09">Custom</value>
+		<value id="0x0A">Verbose</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="POST_Verbose_Boot_Progress">
+		<helptext><![CDATA[Use this option to enable verbose boot progress messaging.]]></helptext>
+		<ev>CQHVBP</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Serial_Only</value>
+		<value id="0x02">All</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Advanced_Crash_Dump_Mode">
+		<helptext><![CDATA[Use this option to enable the Advanced Crash Dump Mode. When enabled the system will be configured to log additional debug information to the Active Health System logs when an unexpected system crash is experienced.]]></helptext>
+		<ev>CQHADVCRDMP</ev>
+		<length>1</length>
+		<value id="0x01">Enabled</value>
+		<value id="0x00">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Date and Time -->
+	<Section name="Time_Format">
+		<helptext><![CDATA[This option controls how the system time is stored in the hardware Real Time Clock (RTC).]]></helptext>
+		<ev>CQHTIME</ev>
+		<length>4</length>
+		<value id="0x00">Coordinated_Universal_Time_(UTC)</value>
+		<value id="0x01">Local_Time</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Hour_Format">
+		<helptext><![CDATA[Hour format, 24 Hours/12 Hours.]]></helptext>
+		<ev>CQHTIME</ev>
+		<length>4</length>
+		<value id="0x00">24_Hours</value>
+		<value id="0x01">12_Hours</value>
+		<mask>0xFF</mask>
+		<byte>1</byte>
+	</Section>
+	<Section name="Daylight_Savings_Time">
+		<helptext><![CDATA[This option controls the Daylight Savings Time (DST) adjustment to the displayed local time.]]></helptext>
+		<ev>CQHTIME</ev>
+		<length>4</length>
+		<value id="0x00">DSTControlDisabled</value>
+		<value id="0x01">DSTControlEnabled</value>
+		<value id="0x02">DSTControlBmc</value>
+		<mask>0xFF</mask>
+		<byte>2</byte>
+	</Section>
+<!-- System Default Options / User Default Options -->
+	<Section name="User_Defined_Defaults">
+		<helptext><![CDATA[This option allows saving or erasing the user defined defaults on the server.]]></helptext>					
+		<ev>CQTUDF</ev>
+		<length>1</length>
+		<value id="0x01">Save</value>
+		<value id="0x02">Erase</value>
+		<mask>0xFF</mask>
+		<byte>0</byte>
+	</Section>
+<!-- CPU to GPU mapping configuration, Added -->	
+	<Section name="CPU_to_GPU_Slot_Mapping_Optimizations">
+		<helptext><![CDATA[Use this option to change the CPU to GPU mapping configuration.]]></helptext>
+		<ev>CQHGPUCFG </ev>
+		<length>1</length>
+		<value id="0x00">CPU_GPU_CFG_ENABLE</value>
+		<value id="0x01">GPU_P2P_CFG_ENABLE</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- PCIe Isolation Support,  Added -->	
+	<Section name="PCIe_Device_Isolation_Support">
+		<helptext><![CDATA[Use this option to configure PCIe Isolation Support.  When enabled, PCIe device will be disabled at runtime when an error is detected.]]></helptext>
+		<ev>CQHPCIISO</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Support IODC, PCIe Isolation, Dead Block Predictor  ,  Added -->	
+	<Section name="IODC_Configuration">
+		<helptext><![CDATA[Enable/Disable IODC (IO Direct Cache): Generate snoops instead of memory lookups, for remote InvItoM (IIO) and/or WCiLF (cores)]]></helptext>
+		<ev>CQHMPL3</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Auto</value>
+		<value id="0x02">EnRemInvitomPush</value>
+		<value id="0x03">EnRemInvitomAllocflow</value>
+		<value id="0x04">EnRemInvitomAllocNanolloc</value> 
+		<value id="0x05">EnRemInvitomAndWcilf</value>
+		<mask>0x07</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="XPT_Remote_Prefetcher">
+		<helptext><![CDATA[Use this option to configure PCIe Isolation Support.  When enabled, PCIe device will be disabled at runtime when an error is detected.]]></helptext>
+		<ev>CQHMPL3</ev>
+		<length>2</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x07</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Dead_Block_Predictor">
+		<helptext><![CDATA[Use this option to configure the Dead Block Predictor (DBP-F) processor performance option.]]></helptext>
+		<ev>CQHMPL3</ev>
+		<length>2</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x60">Enabled</value>
+		<mask>0x60</mask>
+		<byte>0</byte>
+	</Section>
+<!-- SCI RAS Support,GHES signaling support ,  Added -->	
+	<Section name="SCI_RAS_Support">
+		<helptext><![CDATA[Use this option to select the System Control Interrupt (SCI) signaling mode of operation. This setting can be.]]></helptext>
+		<ev>CQHSCIENABLE</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="GHES_v1_Support">
+		<helptext><![CDATA[Important: Please consult documentation before changing this setting, installed Operating System supports the appropriate GHES signaling mode to ensure proper operation.]]></helptext>
+		<ev>CQHSCIENABLE</ev>
+		<length>1</length>
+		<value id="0x00">GhesV1</value>
+		<value id="0x10">GhesV2</value>
+		<mask>0x10</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="VMware_Proprietary_Page_Retire_Support">
+		<helptext><![CDATA[Select this to Enable/Disable VMware Proprietary Page Retire]]></helptext>
+		<ev>CQHSCIENABLE</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x04">Enable</value>
+		<mask>0x04</mask>
+		<byte>0</byte>
+	</Section>
+<!-- AMD xGMI Link Speed , Added -->
+	<Section name="AMD_xGMI_Link_Speed">
+		<helptext><![CDATA[Use this option to enable or disable AMD SMT. When enabled, each physical processor core operates as two logical processor cores.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDXGMIC</ev>
+		<length>1</length>
+		<value id="0x00">Auto</value>
+		<value id="0x01">16_Gbps</value> 
+		<value id="0x02">18_Gbps</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Preferred IO Bus , Added -->
+	<Section name="Preferred_IO_Bus">
+		<helptext><![CDATA[Enable or Disable the Preferred IO Bus feature.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHPREFIOBUS</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Enabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Dynamic_Preferred_IO_Bus">
+		<helptext><![CDATA[When enabled, this option will automatically configure Preferred IO Bus feature based on current system configuration.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHPREFIOBUS</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x02">Enabled</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Configure AMD NBIO LCLK DPM level -->
+	<Section name="NBIO_LCLK_DPM_Level">
+		<helptext><![CDATA[Configure AMD NBIO LCLK DPM level.]]></helptext>			
+		<ev>CQHAMDNBIOBUS</ev>
+		<length>16</length>
+	</Section>
+<!-- PCIe EOI , Addded -->
+	<Section name="PCIe_EOI_Options">
+		<helptext><![CDATA[Select this option to display the PCIe EOI options menu.]]></helptext>			
+		<ev>CQHEOI</ev>
+		<length>4</length>
+	</Section>
+<!-- PCIe Option ROM , Addded -->
+	<Section name="PCIe_Option_ROM">
+		<helptext><![CDATA[ROM to Enable/Disable Option ROM per slot.]]></helptext>			
+		<ev>CQHOPT</ev>
+		<length>46</length>
+	</Section>
+<!-- Provide feature sets for specific performance requirement , Addded -->	
+	<Section name="AMD_Performance_Workload_Profile">
+		<helptext><![CDATA[Provide feature sets for specific performance requirement.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDPROF</ev>
+		<length>1</length>
+		<value id="0x00">ProfileDisabled</value>
+		<value id="0x01">CPUIntensive</value>
+		<value id="0x02">JavaThroughput</value>
+		<value id="0x03">JavaLatency</value>
+		<value id="0x04">PowerEfficiency</value>
+		<value id="0x05">MemoryThroughputIntensive</value>
+		<value id="0x06">StorageIOIntensive</value>
+		<value id="0x07">NICThroughputIntensive</value>
+		<value id="0x08">AcceleratorThroughput</value>
+		<value id="0x09">VMwareVSphereOptimized</value>
+		<value id="0x0A">LinuxKVMOptimized</value>
+		<value id="0x0B">ContainerOptimized</value>
+		<value id="0x0C">RDBMSOptimized</value>
+		<value id="0x0D">BigDataAnalyticsOptimized</value>
+		<value id="0x0E">IOTGateway</value>
+		<value id="0x0F">HPCOptimized</value>
+		<value id="0x10">OpenStackNFV</value>
+		<value id="0x11">OpenStackForRealTimeKernel</value>
+		<mask>0x1F</mask>
+		<byte>0</byte>
+	</Section>
+<!-- The Intelligent Provisioning functionality  , Addded -->	
+	<Section name="Intelligent_Provisioning_(F10_Prompt)_New">
+		<helptext><![CDATA[Use this option to enable or disable the Intelligent Provisioning functionality.]]></helptext>			
+		<ev>CQSFDIS</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x01">Disabled</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Move the MCFG base to 3GB , Addded -->	
+	<Section name="PCIe_Configuration_MMIO(MCFG)_Base_at_3GB">
+		<helptext><![CDATA[Select auto to move the MCFG base to 3GB (0xC0000000).]]></helptext>			
+		<ev>CQHAMDMMCFG</ev>
+		<length>1</length>
+		<value id="0x00">Disabled</value>
+		<value id="0x01">Auto</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- Memory Configuration Violation Reporting , Addded -->	
+	<Section name="Memory_Configuration_Violation_Reporting">
+		<helptext><![CDATA[Use this option to configure how the system will message and log memory configuration violations.]]></helptext>	
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHDIMMPOP</ev>
+		<length>1</length>
+		<value id="0x00">Enabled</value>
+		<value id="0x10">Disabled</value>
+		<mask>0x10</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Memory_Permanent_Fault_Detect">
+		<helptext><![CDATA[This option controls the Intel Memory Permanent Fault Detect (PFD) functionality.]]></helptext>	
+		<proc_mans>
+			<proc_man>Intel</proc_man>
+		</proc_mans>
+		<ev>CQHDIMMPOP</ev>
+		<length>1</length>
+		<value id="0x20">Enabled</value>
+		<value id="0x00">Disabled</value>
+		<mask>0x20</mask>
+		<byte>0</byte>
+	</Section>
+<!-- System Configuration Control Byte -->
+	<Section name="System_Default_Options">
+		<helptext><![CDATA[Use this option to reset all configuration settings to their default values.]]></helptext>			
+		<ev>CQHCONFIG</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x01">Enable</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+	<Section name="Restore_Default_Manufacturing_Settings">
+		<helptext><![CDATA[Use this option to reset all configuration settings to their default manufacturing values.]]></helptext>			
+		<ev>CQHCONFIG</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x02">Enable</value>
+		<mask>0x02</mask>
+		<byte>0</byte>
+	</Section>
+<!-- PMEM QOS Config Setting -->
+	<Section name="PMem_QoS_Options">
+		<helptext><![CDATA[Use this option to prevent a drop in DDR4 bandwidth (for standard memory) when DDRT bandwidth (for persistent memory) is occurring.]]></helptext>			
+		<ev>CQHPMEMQOS</ev>
+		<length>1</length>
+		<value id="0x00">Mode0</value>
+		<value id="0x01">Mode1</value>
+		<value id="0x02">Mode2</value>
+		<mask>0x03</mask>
+		<byte>0</byte>
+	</Section>
+<!-- AMD DMA Remapping Setting -->
+	<Section name="AMD_DMA_Remapping">
+		<helptext><![CDATA[This configures the DMA Remapping setting. DMA Remapping protects against memory corruption and malicious DMA attacks.]]></helptext>			
+		<proc_mans>
+			<proc_man>AMD</proc_man>
+			<proc_man>Advanced Micro Devices</proc_man>
+		</proc_mans>
+		<ev>CQHAMDMISC</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x01">Enable</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- UEFI Variable Access Firmware Control -->
+	<Section name="UEFI_Variable_Access_Firmware_Control">
+		<helptext><![CDATA[Use this option to allow the system BIOS to completely control certain UEFI variables from being written to by other software.]]></helptext>
+		<ev>CQHUVAFC</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x01">Enable</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+<!-- KCS IPMI Interrupt -->
+	<Section name="IPMI_Interrupt_Support">
+		<helptext><![CDATA[Use this option to Enable/Disable IPMI Interrupt Support.]]></helptext>
+		<ev>CQHKCS</ev>
+		<length>1</length>
+		<value id="0x00">Disable</value>
+		<value id="0x01">Enable</value>
+		<mask>0x01</mask>
+		<byte>0</byte>
+	</Section>
+</Conrep>
+
+

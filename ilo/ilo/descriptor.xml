@@ -1,0 +1,48 @@
+<vib version="5.0">
+  <type>bootbank</type>
+  <name>Gen9-ilo</name>
+  <version>0.1</version>
+  <vendor>chimera-labs.com</vendor>
+  <summary>Custom VIB to re-add HPE Proliant Gen9 ilo</summary>
+  <description>HPE removed support for Gen9, this should readd it</description>
+  <release-date>2024-03-05T15:03:42</release-date>
+  <urls>
+    <url key="website">https://chimera-labs.com</url>
+  </urls>
+  <relationships>
+    <depends>
+    </depends>
+    <conflicts/>
+    <replaces/>
+    <provides/>
+    <compatibleWith/>
+  </relationships>
+  <software-tags>
+    <tag>PCIID 103c3307103c3381</tag>
+    <tag>PCIID 103c3307159000e4</tag>
+    <tag>PCIID 103c33071590027f</tag>
+    <tag>module</tag>
+    <tag>driver</tag>
+  </software-tags>
+  <system-requires>
+    <maintenance-mode>false</maintenance-mode>
+  </system-requires>
+  <file-list>
+      <file>etc/vmware/default.map.d/ilo.map</file>
+    <file>usr/lib/vmware/vmkmod/ilo</file>
+    <file>usr/share/hwdata/default.pciids.d/ilo.ids</file>
+  </file-list>
+  <acceptance-level>community</acceptance-level>
+  <live-install-allowed>false</live-install-allowed>
+  <live-remove-allowed>false</live-remove-allowed>
+  <cimom-restart>false</cimom-restart>
+  <stateless-ready>true</stateless-ready>
+  <overlay>false</overlay>
+  <payloads>
+    <payload name="ilo" type="tgz" size="9077">
+        <checksum checksum-type="sha-256">32fceabdb9a0d5cbc3af4104a9697b970c123329e41a2ccd05e04b30d0ac07d3</checksum>
+        <checksum checksum-type="sha-256" verify-process="gunzip">b9ecb4da10eb81a14351482b2ccb3f9dce8a5c26ff7afceb8d90ba1887acea3a</checksum>
+        <checksum checksum-type="sha-1" verify-process="gunzip">0133b94842385b5f4d6750075165e3bb781bac35</checksum>
+    </payload>
+  </payloads>
+</vib>

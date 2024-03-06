@@ -1,0 +1,410 @@
+#!/bin/sh
+#
+# Copyright (c) 2019 VMware, Inc.  All rights reserved.
+#
+# /opt/mxdk/buildagent/work/MTX_SOURCE_PATH/.build/build/daemondk-shutdown/release/uw64/sut:
+#   Start and stop the "sut" daemons.
+#
+# chkconfig: on 99 99
+#
+
+DAEMON_START_LIST="sut:n sutd.sh"
+DAEMON_STOP_LIST="sut"
+PROVIDER_LIST=""
+SOLUTION_ID=sut
+VENDOR_CODE=HPE
+FULL_VERSION=701.2.9.1.16-1OEM.701.0.0.16850804
+INSTALL_ROOT=/opt/sut/
+CONFIG_FILE=/etc/vmware/daemon/config/sut.json
+LD_LIBRARY_PATH=/opt/sut/lib64
+BIN_DIR=/opt/sut/bin
+DATA_DIR=/opt/sut/data
+SOCKET_DIR=/opt/sut/sockets
+TMP_DIR=/opt/sut/tmp
+VITAL_DIR=/opt/sut/vital
+SYSLOG_NAME=sut
+export SOLUTION_ID VENDOR_CODE FULL_VERSION INSTALL_ROOT
+export CONFIG_FILE LD_LIBRARY_PATH BIN_DIR
+export DATA_DIR SOCKET_DIR TMP_DIR SYSLOG_NAM VITAL_DIR
+WATCHDOG="/usr/lib/vmware/daemonMgmt/bin/watchdog.sh"
+DAEMON_START="/usr/lib/vmware/daemonMgmt/bin/daemon-start.sh"
+MEMORY="100"
+LOG="/var/log/daemon-init.log"
+LOGGER_CONF_PATH="/etc/vmsyslog.conf.d/${SOLUTION_ID}.conf"
+DAEMONMGMT_SANDBOX_BINARY="/usr/lib/vmware/daemonMgmt/bin/daemonMgmtSandbox"
+DOMAINID_FILE="/var/run/vmware/${SOLUTION_ID}Dom.domainid"
+SECPOLICYTOOLS="/bin/secpolicytools"
+LOGGER_CONF="
+[vmsyslog-logger]
+
+# unique id for this logger
+id = sut
+
+# description of this logger
+descr = sut daemon log
+
+# descriptive name for this logger
+name =  sut daemon log
+
+# idents this logger is interested in
+idents = sut
+
+# output file (e.g. foo == /var/log/foo.log)
+file = sut
+
+# file logger class
+fclass = FileLoggerSyslog
+
+# network logger class
+nclass = NetworkFilterSyslogTimestamp
+"
+# hostd might not be available, and thus localcli is used instead of esxcli.
+ESXCLI=localcli
+
+#
+# Generate a VMware looking time stamp for logging
+#
+log_msg() {
+   echo $(date +%FT%TZ) ${SOLUTION_ID}: $@
+}
+
+#
+# execute a command with log output
+#
+log_exec() {
+   log_msg +$@
+   eval $@
+}
+
+#
+# Start the sut daemons
+#
+#   $1 specifies an optional argument to the DAEMON_START utility.
+#   Typically, it is used to pass in the "-b" option for conditional
+#   start (i.e. don't start if already running).
+#
+dstart() {
+   # Fetch sandbox domain ID
+   DOMAINID=$(cat ${DOMAINID_FILE} 2> /dev/null)
+   if [ -z "${DOMAINID}" ]; then
+      log_msg Failed to get sandbox domain ID for ${SOLUTION_ID}
+      return 1
+   fi
+   log_exec ${DAEMON_START} ++group=host/vim/vmvisor/${SOLUTION_ID},securitydom=${DOMAINID} \
+            ${1} -s ${SOLUTION_ID} -w ${WATCHDOG} ${DAEMON_START_LIST}
+   retcode=$?
+   if [ $retcode -ne 0 ]; then
+      log_msg Daemon start failed for ${SOLUTION_ID}
+      return 1
+   fi
+}
+
+#
+# Stop the sut daemons
+#
+dstop() {
+   for DAEMON in ${DAEMON_STOP_LIST}; do
+      DAEMON_BINARY=${BIN_DIR}/${DAEMON}
+
+      # This stops both the watchdog process and the daemon.
+      log_exec ${WATCHDOG} -k "${SOLUTION_ID}-${DAEMON}"
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg Error: daemon watchdog failed to stop, exit status $retcode
+
+         # Try to kill the DAEMON ourselves.
+         # The daemon may have changed it's name through exec,
+         # so this is imperfect.
+         PID=$(daemon_pid ${DAEMON} ${DAEMON_BINARY})
+         if [ ! -z "$PID" ]; then
+            log_exec kill -9 $PID
+         fi
+      fi
+   done
+}
+
+#
+# Start the sut daemons.
+# Redirect stdout and stderr to the LOG file.
+#
+daemons_start() {
+   (
+      log_msg Starting daemons ...
+      dstart $1
+      return $?
+   ) >> ${LOG} 2>&1
+}
+
+#
+# Stop the sut daemons.
+# Redirect stdout and stderr to the LOG file.
+#
+daemons_stop() {
+   (
+      log_msg Stopping daemons ...
+      dstop
+   ) >> ${LOG} 2>&1
+}
+
+#
+# Start the sut daemons and cim providers.  Also set
+# up the trampolines for the esxcli plugins, the resource pool and
+# the vmkaccess domain.
+#
+solution_start() {
+   (
+      log_msg Starting ...
+
+      # Configure logger for the daemon
+      printf "$LOGGER_CONF" >$LOGGER_CONF_PATH
+      log_exec ${ESXCLI} system syslog reload
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg Failed to reload vmsyslogd
+         solution_stop
+         return 1
+      fi
+
+      # Check if our resource pool exists.
+      log_exec ${ESXCLI} --plugin-dir /usr/lib/vmware/esxcli/int sched group \
+         getmemconfig --group-path=host/vim/vmvisor/${SOLUTION_ID}
+      exists_status=$?
+
+      if [ "${1}" = "install" -a $exists_status -eq 0 ]; then
+         log_msg Warning: resource pool already exists for ${SOLUTION_ID}
+      fi
+
+      # configure the resource pool if it doesn't already exist
+      if [ $exists_status -ne 0 ]; then
+         log_exec ${ESXCLI} --plugin-dir /usr/lib/vmware/esxcli/int sched group add \
+            --group-name=${SOLUTION_ID} --parent-path=host/vim/vmvisor
+         if [ $retcode -ne 0 ]; then
+            log_msg Error: failed to create the resource pool for ${SOLUTION_ID}
+            solution_stop
+            return 1
+         fi
+      fi
+      log_exec ${ESXCLI} --plugin-dir /usr/lib/vmware/esxcli/int sched group \
+         setmemconfig --group-path=host/vim/vmvisor/${SOLUTION_ID} \
+         --max=${MEMORY} --min=0 --units=mb
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg Error: failed to configure the resource pool for ${SOLUTION_ID}
+         solution_stop
+         return 1
+      fi
+
+      # Create daemon sandbox
+      log_exec ${DAEMONMGMT_SANDBOX_BINARY} -c ${CONFIG_FILE}
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg Error: failed to create sandbox for ${SOLUTION_ID}
+         solution_stop "remove"
+         return 1
+      fi
+
+      # Fetch sandbox domain ID
+      DOMAINID=$(cat ${DOMAINID_FILE} 2> /dev/null)
+      if [ -z "${DOMAINID}" ]; then
+         log_msg Failed to get sandbox domain ID for ${SOLUTION_ID}
+         solution_stop "remove"
+         return 1
+      fi
+
+      # start the daemons
+      dstart
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg ${DAEMON} Error: failed to start daemons, exit status $retcode
+         solution_stop "remove"
+         return  1
+      fi
+
+      # enable the cim providers if live installing the VIB
+      if [ "${1}" = "install" ]; then
+         for provider in ${PROVIDER_LIST}; do
+            log_exec ${ESXCLI} system wbem provider set -n $provider -e true
+            retcode=$?
+            if [ $retcode -ne 0 ]; then
+               log_msg ${DAEMON} Error: failed to enable cim provider \
+                  ${provider}, exit status $retcode
+               solution_stop "remove"
+               return  1
+            fi
+         done
+      fi
+
+      log_msg ... Start is complete
+      return 0
+   ) >> ${LOG} 2>&1
+}
+
+#
+# Stop the sut daemons and cim_providers.  Tear down
+# the esxcli trampolines, the resource pool and the vmkaccess domain.
+#
+solution_stop() {
+   (
+      log_msg Stopping ...
+
+      # stop the daemons
+      dstop
+
+      # disable the cim providers if live removing the VIB
+      if [ "${1}" = "remove" ]; then
+         for provider in ${PROVIDER_LIST}; do
+            log_exec ${ESXCLI} system wbem provider set -n $provider -e false
+         done
+      fi
+
+      # Remove domainid file if present
+      if [ -f ${DOMAINID_FILE} ]; then
+         log_exec rm ${DOMAINID_FILE}
+      fi
+
+      # Destroy the solution's sandbox
+      log_exec ${DAEMONMGMT_SANDBOX_BINARY} -d ${CONFIG_FILE}
+
+      # PR 2373576: The return status from daemonMgmtSandbox is
+      #             unreliable.  So check with secpolicytools if
+      #             the domain exists.  An error may indicate that
+      #             delete succeeded.
+      #
+      # Let's wait a bit if we failed to destroy the vmkaccess domain,
+      # for reap may be in progress for some worlds.
+      log_exec ${SECPOLICYTOOLS} -D ${SOLUTION_ID}Dom
+      retcode=$?
+      local tries=0
+      while [ $retcode -eq 0 -a $tries -lt 3 ]; do
+         log_msg Error: failed to destroy vmkaccess domain for ${SOLUTION_ID}
+         sleep 10
+         log_exec ${DAEMONMGMT_SANDBOX_BINARY} -d ${CONFIG_FILE}
+         log_exec ${SECPOLICYTOOLS} -D ${SOLUTION_ID}Dom
+         retcode=$?
+         tries=$(expr $tries + 1)
+      done
+
+      # Failure to remove the vmkaccess domain is a critical failure.
+      # In this case we must fail VIB removal.
+      if [ $retcode -eq 0 ]; then
+         return 1
+      fi
+
+      # remove the resource pool only if removing the vib
+      if [ "${1}" = "remove" ]; then
+
+         # First Check if it exists.
+         log_exec ${ESXCLI} --plugin-dir /usr/lib/vmware/esxcli/int sched group \
+            getmemconfig --group-path=host/vim/vmvisor/${SOLUTION_ID}
+         exists_status=$?
+
+         if [ $exists_status -eq 0 ]; then
+            log_exec ${ESXCLI} --plugin-dir /usr/lib/vmware/esxcli/int sched group \
+               delete --group-path=host/vim/vmvisor/${SOLUTION_ID}
+            retcode=$?
+            if [ $retcode -ne 0 ]; then
+               log_msg Failed to remove the resource pool for ${SOLUTION_ID}
+               return 1
+            fi
+         fi
+      fi
+
+      # Remove the logger config
+      log_exec rm $LOGGER_CONF_PATH
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg Error: failed to remove filter daemon logger config
+      fi
+      log_exec ${ESXCLI} system syslog reload
+      retcode=$?
+      if [ $retcode -ne 0 ]; then
+         log_msg Error: failed to restart vmsyslogd
+         return 1
+      fi
+
+      log_msg ... Stop done
+
+      return 0
+   ) >> ${LOG} 2>&1
+}
+
+#
+# Get the pid of the sut daemons
+#
+daemon_pid() {
+   ps -cu 2> /dev/null | awk -vdaemon=$1 -vbinary=$2 '
+      $3 == daemon {
+         for (i = 4; i <= NF; ++i) {
+            if ($i == binary) {
+               print $1
+               exit
+            }
+         }
+      }'
+}
+
+#
+# Process comand line options
+#
+case "${1}" in
+   start)
+      solution_start "${2}"
+   ;;
+
+   stop)
+      solution_stop "${2}"
+   ;;
+
+   status)
+      status=0
+      for DAEMON in ${DAEMON_STOP_LIST}; do
+         # ask the watchdog for the status of the daemon
+         ${WATCHDOG} -S "${SOLUTION_ID}-${DAEMON}"
+         retcode=$?
+         if [ $retcode -ne 0 ]; then
+            status=3
+         fi
+      done
+      exit $status
+   ;;
+
+   restart)
+      solution_stop
+      solution_start
+   ;;
+
+   #
+   # Starts all daemons that aren't already running but doesn't affect the
+   # rest of the solution, i.e. the resource pool, vmkaccess domain, esxcli
+   # extensions and cim providers are unaffected.
+   #
+   daemons_start)
+      daemons_start -b
+   ;;
+
+   #
+   # Stops all daemons but doesn't affect the rest of the solution,
+   # i.e. the resource pool, vmkaccess domain, esxcli extensions and
+   # cim providers are unaffected.
+   #
+   daemons_stop)
+      daemons_stop
+   ;;
+
+   #
+   # Restart all daemons but doesn't affect the rest of the solution,
+   # i.e. the resource pool, vmkaccess domain, esxcli extensions and
+   # cim providers are unaffected.
+   #
+   daemons_restart)
+      daemons_stop
+      daemons_start
+   ;;
+
+   *)
+      echo "Usage: $(basename "$0")" \
+         "{start|stop|status|restart|daemons_start|daemons_stop|daemons_restart}"
+      log_msg Usage: Params $@
+      exit 1
+   ;;
+esac
